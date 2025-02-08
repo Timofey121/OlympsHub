@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   db:
     image: postgres:15
@@ -79,19 +77,19 @@ services:
 
   worker:
     restart: always
-    build: .
+    build: ./Site
     volumes:
       - .:/usr/src/app
     depends_on:
       - redis
       - django
     env_file:
-      - ./.env.db
+      - env.db
     command: 'celery -A Site worker -l info'
 
   beat:
     restart: always
-    build: .
+    build: ./Site
     volumes:
       - .:/usr/src/app
     depends_on:
@@ -99,7 +97,7 @@ services:
       - django
       - worker
     env_file:
-      - ./.env.db
+      - env.db
     command: 'celery -A Site beat -l info'
 
 
