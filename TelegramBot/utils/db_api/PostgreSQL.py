@@ -3,7 +3,7 @@ import sqlite3
 
 import psycopg2
 
-from TelegramBot.data.config import POSTGRES_USER, POSTGRES_PASSWORD, HOST, POSTGRES_DB
+from ...data.config import POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_HOST, POSTGRES_PORT
 
 
 def main():
@@ -12,8 +12,8 @@ def main():
     con = psycopg2.connect(user=POSTGRES_USER,
                            # пароль, который указали при установке PostgreSQL
                            password=POSTGRES_PASSWORD,
-                           host=HOST,
-                           port="5432")
+                           host=POSTGRES_HOST,
+                           port=POSTGRES_PORT)
 
 async def add_user(telegram_id, full_name, blocked, data_registration):
     main()

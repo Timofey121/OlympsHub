@@ -1,23 +1,21 @@
 services:
-  db:
+  postgres:
     image: postgres:15
     restart: always
-    container_name: my_postgres
     volumes:
       - postgres_data:/var/lib/postgresql/data
     env_file:
-      .env.db
+      - .env.db
     ports:
-      - "5432:5432"
+      - "5433:5432"
     networks:
       - my_network
 
   django:
     build: Site
-    container_name: my_django
     restart: always
     depends_on:
-      - db
+      - postgres
     volumes:
       - ./Site:/Site
       - static_volume:/home/app/web/staticfiles
@@ -36,20 +34,18 @@ services:
 
   bot:
     build: ./TelegramBot
-    container_name: my_bot
     restart: always
     depends_on:
-      - db
+      - postgres
     env_file:
       - .env.db
       - TelegramBot/.env.tg
     networks:
       - my_network
-    command: [ "python", "bot.py" ]
+    command: [ "python", "main_olympiads.py" ]
 
   nginx:
     image: nginx:latest
-    container_name: my_nginx
     restart: always
     depends_on:
       - django
@@ -66,6 +62,8 @@ services:
   redis:
     image: "redis:alpine"
     restart: always
+    networks:
+      - my_network
 
   flower:
     image: mher/flower
@@ -74,6 +72,8 @@ services:
       - CELERY_BROKER_URL=redis://redis:6379/0
     ports:
       - "5555:5555"
+    networks:
+      - my_network
 
   worker:
     restart: always
@@ -84,8 +84,10 @@ services:
       - redis
       - django
     env_file:
-      - env.db
+      - .env.db
     command: 'celery -A Site worker -l info'
+    networks:
+      - my_network
 
   beat:
     restart: always
@@ -97,8 +99,10 @@ services:
       - django
       - worker
     env_file:
-      - env.db
+      - .env.db
     command: 'celery -A Site beat -l info'
+    networks:
+      - my_network
 
 
 volumes:

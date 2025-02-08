@@ -5,12 +5,12 @@ from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.types import ReplyKeyboardRemove
 
-from TelegramBot.data.config import ADMINS
-from TelegramBot.keyboards.default.buttons_menu import main_keyboard
-from TelegramBot.keyboards.default.v_menu import buttons_menu
-from TelegramBot.loader import dp
-from TelegramBot.states import Test
-from TelegramBot.utils.db_api.PostgreSQL import add_user_feedback, subscriber_exists
+from ...data.config import ADMINS
+from ...keyboards.default.buttons_menu import main_keyboard
+from ...keyboards.default.v_menu import buttons_menu
+from ...loader import dp
+from ...states import Test
+from ...utils.db_api.PostgreSQL import add_user_feedback, subscriber_exists
 
 
 @dp.message_handler(text="📝 Оставить отзыв", state=None)

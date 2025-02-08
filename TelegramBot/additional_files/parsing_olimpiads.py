@@ -10,7 +10,7 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from xvfbwrapper import Xvfb
 
-from TelegramBot.additional_files.dictionary import numbers, months, months2, subjects_rsosh
+from ..additional_files.dictionary import numbers, months, months2, subjects_rsosh
 
 
 def connection_to_bd(host, user, passwd, database):

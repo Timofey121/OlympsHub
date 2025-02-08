@@ -6,11 +6,11 @@ from aiogram.dispatcher import FSMContext
 from aiogram.types import ReplyKeyboardRemove
 from aiogram.utils.markdown import hbold, hunderline, hlink
 
-from TelegramBot.keyboards.default.buttons_menu import main_keyboard
-from TelegramBot.keyboards.inline.all_or_choice import inline_buttons_choose
-from TelegramBot.keyboards.inline.buttons_lessons import inline_buttons_lessons
-from TelegramBot.loader import dp
-from TelegramBot.utils.db_api.PostgreSQL import subscriber_exists, information_about_olympiads, del_olympic, \
+from ...keyboards.default.buttons_menu import main_keyboard
+from ...keyboards.inline.all_or_choice import inline_buttons_choose
+from ...keyboards.inline.buttons_lessons import inline_buttons_lessons
+from ...loader import dp
+from ...utils.db_api.PostgreSQL import subscriber_exists, information_about_olympiads, del_olympic, \
     del_olympic_in_olympiads_parsing, select_sub_id
 
 

@@ -2,8 +2,8 @@ from aiogram import types
 from aiogram.dispatcher.filters import Command
 from aiogram.utils.markdown import hlink, hunderline, hbold
 
-from TelegramBot.loader import dp
-from TelegramBot.utils.db_api.PostgreSQL import select_data_sub_info, subscriber_exists, select_user, select_sub
+from ...loader import dp
+from ...utils.db_api.PostgreSQL import select_data_sub_info, subscriber_exists, select_user, select_sub
 
 
 @dp.message_handler(text="🔔 Просмотр подключенных уведомлений")

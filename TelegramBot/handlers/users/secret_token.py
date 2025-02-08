@@ -2,9 +2,9 @@ from secrets import token_hex
 
 from aiogram import types
 
-from TelegramBot.keyboards.default.buttons_menu import main_keyboard
-from TelegramBot.loader import dp
-from TelegramBot.utils.db_api.PostgreSQL import subscriber_exists, secret_token_exists, add_token
+from ...keyboards.default.buttons_menu import main_keyboard
+from ...loader import dp
+from ...utils.db_api.PostgreSQL import subscriber_exists, secret_token_exists, add_token
 
 
 @dp.message_handler(text="🧑🏻‍💻 Получить Секретный Токен для синхронизации сайта и Телеграмм бота")

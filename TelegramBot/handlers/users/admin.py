@@ -4,13 +4,13 @@ from aiogram.dispatcher.filters import Command
 from aiogram.types import ReplyKeyboardRemove
 from aiogram.utils.markdown import hbold
 
-from TelegramBot.data.config import ADMINS
-from TelegramBot.keyboards.default.admin_commands import keyboard_4
-from TelegramBot.keyboards.default.buttons_menu import main_keyboard
-from TelegramBot.keyboards.default.v_menu import buttons_menu
-from TelegramBot.loader import dp
-from TelegramBot.states import Test
-from TelegramBot.utils.db_api.PostgreSQL import select_all_users, select_data_olimp_use_id, count_users, select_blocked_users, \
+from ...data.config import ADMINS
+from ...keyboards.default.admin_commands import keyboard_4
+from ...keyboards.default.buttons_menu import main_keyboard
+from ...keyboards.default.v_menu import buttons_menu
+from ...loader import dp
+from ...states import Test
+from ...utils.db_api.PostgreSQL import select_all_users, select_data_olimp_use_id, count_users, select_blocked_users, \
     update_blocked_users, subscriber_exists, all_tech_failed, del_tech, all_feedback, del_feedback, \
     select_subjects_olimp_use_id, count_olympiads
 
