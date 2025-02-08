@@ -37,14 +37,14 @@ services:
              gunicorn --bind 0.0.0.0:8000 backend.wsgi"
 
   bot:
-    build: ../weqdefw/TelegramBot
+    build: ./TelegramBot
     container_name: my_bot
     restart: always
     depends_on:
       - db
     env_file:
       - .env.db
-      - ../weqdefw/TelegramBot/.env.tg
+      - TelegramBot/.env.tg
     networks:
       - my_network
     command: [ "python", "bot.py" ]
@@ -79,7 +79,7 @@ services:
 
   worker:
     restart: always
-    build: ../weqdefw
+    build: .
     volumes:
       - .:/usr/src/app
     depends_on:
@@ -91,7 +91,7 @@ services:
 
   beat:
     restart: always
-    build: ../weqdefw
+    build: .
     volumes:
       - .:/usr/src/app
     depends_on:

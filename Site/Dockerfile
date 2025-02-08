@@ -28,8 +28,8 @@ RUN pip install --upgrade pip
 COPY . .
 
 
-COPY ./req.txt .
-RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r req.txt
+COPY ./requirements.txt .
+RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r requirements.txt
 
 
 FROM python:3.11
@@ -51,7 +51,7 @@ RUN apt-get update \
     && apt-get install -y netcat-traditional
 
 COPY --from=builder /usr/src/app/wheels /wheels
-COPY --from=builder /usr/src/app/req.txt .
+COPY --from=builder /usr/src/app/requirements.txt .
 RUN pip install --no-cache /wheels/*
 
 COPY entrypoint.prod.sh $APP_HOME

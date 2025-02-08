@@ -1,18 +1,3 @@
-
-<h1 align="center">
-  <br>
-  <a href="https://github.com/Timofey121/SiteForOlimpic"><img src="olympic/static/olympic/images/main.ico" alt="Markdownify" width="200"></a>
-  <br>
-  Olympic
-  <br>
-</h1>
-
-<h1 align="center">
-  <br>
-  <a href="https://github.com/Timofey121/SiteForOlimpic"><img src="olympic/static/olympic/images/main1.webp" ></a>
-  <a href="https://github.com/Timofey121/SiteForOlimpic"><img src="olympic/static/olympic/images/main2.webp"></a>
-</h1>
-
 ## О проекте
 Программный комплекс для предоставления информации о школьных олимпиадах.
 
