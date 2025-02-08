@@ -1,5 +1,4 @@
 *.pyc
 __pycache
-SiteForOlimpic/.env.dev
 .vev
 .idea

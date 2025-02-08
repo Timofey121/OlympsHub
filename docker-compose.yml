@@ -7,7 +7,7 @@ services:
     env_file:
       - .env.db
     ports:
-      - "5433:5432"
+      - "5432:5432"
     networks:
       - my_network
 
@@ -30,7 +30,7 @@ services:
     command: >
       sh -c "python manage.py migrate &&
              python manage.py collectstatic --noinput &&
-             gunicorn --bind 0.0.0.0:8000 backend.wsgi"
+             gunicorn --bind 0.0.0.0:8000 Site.wsgi"
 
   bot:
     build: ./TelegramBot
@@ -50,7 +50,6 @@ services:
     depends_on:
       - django
     volumes:
-      - ./nginx/certs:/etc/ssl/certs
       - static_volume:/home/app/web/staticfiles
       - media_volume:/home/app/web/mediafiles
     ports:

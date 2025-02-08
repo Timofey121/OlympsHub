@@ -9,31 +9,22 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-import os
 import os.path
 from pathlib import Path
 
-from django.urls import include, path
 from dotenv import load_dotenv
-from environs import Env
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-if os.path.isfile('.env.db.dev'):
-    load_dotenv(os.path.join(BASE_DIR, '.env.db.dev'))
-    SESSION_COOKIE_SECURE = False
-    CSRF_COOKIE_SECURE = False
-    SECURE_SSL_REDIRECT = False
-    ALLOWED_HOSTS = []
-else:
-    load_dotenv(os.path.join(BASE_DIR, '.env.db.prod'))
-    ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    CORS_ORIGIN_ALLOW_ALL = True
-    CSRF_COOKIE_SECURE = True
-    SESSION_COOKIE_SECURE = True
-    SECURE_HSTS_SECONDS = 340505040
-    SECURE_SSL_REDIRECT = True
+
+load_dotenv(os.path.join(BASE_DIR, '.env.site'))
+ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+CORS_ORIGIN_ALLOW_ALL = True
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+SECURE_HSTS_SECONDS = 340505040
+SECURE_SSL_REDIRECT = True
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -144,8 +135,8 @@ STATICFILES_DIRS = []  # список дополнительных, нестан
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
 MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
 
 # Теперь используем вместо библиотеки python-dotenv библиотеку environs
 EMAIL_HOST = 'smtp.gmail.com'
