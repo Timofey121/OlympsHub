@@ -1,0 +1,112 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    restart: always
+    container_name: my_postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    env_file:
+      .env.db
+    ports:
+      - "5432:5432"
+    networks:
+      - my_network
+
+  django:
+    build: Site
+    container_name: my_django
+    restart: always
+    depends_on:
+      - db
+    volumes:
+      - ./Site:/Site
+      - static_volume:/home/app/web/staticfiles
+      - media_volume:/home/app/web/mediafiles
+    env_file:
+      - .env.db
+      - Site/.env.site
+    ports:
+      - "8000:8000"
+    networks:
+      - my_network
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py collectstatic --noinput &&
+             gunicorn --bind 0.0.0.0:8000 backend.wsgi"
+
+  bot:
+    build: ../weqdefw/TelegramBot
+    container_name: my_bot
+    restart: always
+    depends_on:
+      - db
+    env_file:
+      - .env.db
+      - ../weqdefw/TelegramBot/.env.tg
+    networks:
+      - my_network
+    command: [ "python", "bot.py" ]
+
+  nginx:
+    image: nginx:latest
+    container_name: my_nginx
+    restart: always
+    depends_on:
+      - django
+    volumes:
+      - ./nginx/certs:/etc/ssl/certs
+      - static_volume:/home/app/web/staticfiles
+      - media_volume:/home/app/web/mediafiles
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - my_network
+
+  redis:
+    image: "redis:alpine"
+    restart: always
+
+  flower:
+    image: mher/flower
+    environment:
+      - FLOWER_PORT=5555
+      - CELERY_BROKER_URL=redis://redis:6379/0
+    ports:
+      - "5555:5555"
+
+  worker:
+    restart: always
+    build: ../weqdefw
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - redis
+      - django
+    env_file:
+      - ./.env.db
+    command: 'celery -A Site worker -l info'
+
+  beat:
+    restart: always
+    build: ../weqdefw
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - redis
+      - django
+      - worker
+    env_file:
+      - ./.env.db
+    command: 'celery -A Site beat -l info'
+
+
+volumes:
+  postgres_data:
+  static_volume:
+  media_volume:
+
+networks:
+  my_network:

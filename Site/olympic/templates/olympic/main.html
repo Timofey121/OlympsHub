@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="shortcut icon" href="{% static 'olympic/images/favicon.ico' %}" type="image/x-icon"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Irish+Grover&family=Open+Sans:wght@400;600;700&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'olympic/css/deafult.css' %}">
+    <link rel="stylesheet" href="{% static 'olympic/css/style.css' %}">
+</head>
+<body>
+{% include 'olympic/base/header.html' %}
+
+<div class="container">
+    <div class="attention_block">
+        <div class="attention_title">
+            Предупреждение!
+        </div>
+        <div class="attentional_text">
+            Вы можете подключить Telegram аккаунт с помощью Секретного Токена. Секретный Токен выдается в Telegram боте
+            Olympic.<br>
+            Без подключения Telegram аккаунта все уведомления по олимпиадам будут приходить на почту.
+        </div>
+    </div>
+</div>
+<div class="intro_block">
+    <div class="container">
+        <div class="greetings">
+            Приветствуем Вас!
+        </div>
+        <div class="introduction">
+            <div class="introduction_inner">
+                <div class="intro_title">
+                    В чем смысл данного сайта?
+                </div>
+                <div class="intro_subtitle">
+                    Сегодня олимпиады - это альтернативный способ поступить в вуз. Статус призера или победителя
+                    олимпиады дает реальную возможность абитуриенту поступить в самые престижные вузы без вступительных
+                    испытаний или на преимущественных условиях (в зависимости от ВУЗа).
+                </div>
+                <div class="intro_txt">
+                    <span>Ссылка на <a href="https://t.me/OlympicPathway_bot">Telegram бот</a>, который работает также как этот сайт.</span>
+                    <span>В этом Telegram боте Вы можете получить Секретный Токен, для синхронизации сайта и Telegram.</span>
+                    <span>Ссылка на бота, <span class="dz">в виде qr-кода</span>, предоставлена <span
+                            class="intro_txt_right">справа</span> <i class="intro_txt_span_down">внизу</i>.</span>
+                </div>
+            </div>
+            <div class="introduction_qr_cont">
+                <a href=""><img src="{% static 'olympic/images/tg-qr.png' %}" alt=""></a>
+
+
+                <div class="qr_txt">
+                    Наведите камеру, чтобы перейти в <span>Telegram бот</span>.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'olympic/base/footer.html' %}
+<script src="{% static 'olympic/js/code.jquery.com_jquery-3.7.0.js' %}"></script>
+<script src="{% static 'olympic/js/script.js' %}"></script>
+</body>
+</html>

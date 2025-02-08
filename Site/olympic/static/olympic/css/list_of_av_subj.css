@@ -1,0 +1,1283 @@
+
+.null_olympiads {
+    margin: 0 40px;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 30px;
+    text-align: center;
+    color: #2A222B;
+    padding-bottom: 20px;
+}
+.null_olympiads {
+    font-size: 18px;
+}
+.attention_block {
+    margin-top: 130px;
+}
+.attention_title {
+    color: #EE3035;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 36px;
+    padding-top: 35px;
+    margin-bottom: 20px;
+}
+.attention_title {
+    font-size: 22px;
+}
+@media screen and (max-width: 1420px) {
+    .null_olympiads {
+        font-size: 16px;
+        padding-bottom: 10px;
+    }
+    .attention_block {
+        margin-top: 160px;
+    }
+    .attention_title {
+        padding-top: 20px;
+        margin-bottom: 10px;
+        font-size: 20px;
+    }
+}
+@media screen and (max-width: 480px) {
+    .null_olympiads {
+        font-size: 16px;
+    }
+    .attention_block {
+        margin-top: 110px;
+    }
+    .attention_title {
+        font-size: 18px;
+    }
+}
+.attention_block {
+    width: 100%;
+    background: #F8F8F8;
+    border-radius: 20px;
+    margin: 19px auto 0;
+}
+
+.list-pages {
+    text-align: center;
+    margin: 0 0 20px 0;
+    }
+
+    .list-pages ul {
+        margin: 20px 0 0 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .list-pages ul li {
+        display: inline-block;
+        margin: 0 20px 0 0;
+    }
+
+    .list-pages a {
+        color: #000;
+        font-size: 24px;
+        text-decoration: none;
+    }
+
+    .list-pages .page-num, .page-num-selected {
+        display: inline-block;
+        width: 60px;
+        height: 60px;
+        padding: 16px 0 0 0;
+        border: 1px solid #d0d0d0;
+        border-radius: 40px;
+    }
+
+    .list-pages .page-num:hover {
+        box-shadow: 3px 3px 1px #d0d0d0;
+    }
+
+    .list-pages .page-num-selected {
+        border: none;
+        color: #000;
+        font-size: 20px;
+    }
+
+    .list-pages .page-num-selected:hover {
+        box-shadow: none;
+    }
+.li_of_av_title {
+    padding-top: 210px;
+    font-size: 38px;
+    font-weight: 700;
+    color: #2A222B;
+}
+.li_of_av_subtitle {
+    margin-top: 4px;
+    font-size: 20px;
+    font-weight: 400;
+    color: hsla(293, 12%, 15%, 0.8);
+}
+.list_of_available_subj {
+    margin-top: 40px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px 20px;
+    margin-bottom: 50px;
+    align-content: center;
+}
+.list_of_available_subj a {
+    text-decoration: none;
+}
+.subject_card {
+    position: relative;
+    width: calc((100%/6)-10px);
+    height: 100px;
+    border-radius: 20px;
+    background-color: #fff;
+    border: 1px solid hsla(0, 0%, 47%, 0.5);
+    transition: all .3s ease-in;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.subject_card:hover {
+    border: 0;
+    background-color: #EE3035;
+    color: #fff;
+}
+.white_dot {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    border-radius: 50%;
+}
+.subject_card img {
+    width: 38px;
+    height: 38px;
+    margin-right: 12px;
+}
+.sub_card_txt {
+    height: 54px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.sub_card_title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2A222B;
+    font-family: 'Raleway', sans-serif;
+    transition: all .3s ease-in;
+}
+.subject_card:hover .sub_card_title {
+    color: #fff;
+}
+.sub_card_class {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400px;
+    color: hsla(299, 11%, 15%, 0.7);
+    transition: all .3s ease-in;
+}
+.subject_card:hover .sub_card_class {
+    color: hsla(0, 0%, 100%, 0.8);
+}
+.li_of_av_line {
+    width: 100%;
+    height: 1px;
+    background-color: hsla(0, 0%, 47%, 0.3);
+}
+
+.show_olympiads {
+    padding-top: 40px;
+}
+
+.show_olimp label {
+    margin-right: 10px;
+    font-size: 18px;
+    font-weight: 400;
+    color: #777777;
+}
+.show_olimp button {
+    border: 0;
+    font-size: 18px;
+    font-weight: 400;
+    color: #777777;
+    background-color: inherit;
+    text-decoration: underline;
+    margin-left: 10px;
+}
+.selected_olympiads {
+    margin-top: 70px;
+    margin-bottom: 140px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    gap: 20px 20px;
+}
+.olimp_card {
+    width: calc((100%/2)-10px);
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0px 0px 14px 0px #2575FC4D;
+    position: relative;
+    overflow: hidden;
+}
+.olimp_card::before {
+    content: "";
+    position: absolute;
+    width: 500%;
+    height: 500%;
+    top: -200%;
+    left: -200%;
+    z-index: -1;
+    background-image: url(../images/cellsheet.png);
+    background-repeat: repeat;
+    transform: rotate(345deg) scale(.3);
+}
+.yellow_dot {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    right: 40px;
+    top: 40px;
+    background-color: #FFE471;
+}
+.olimp_card_container {
+    margin-left: 40px;
+    margin-right: 40px;
+}
+.olimp_card_intro {
+    padding-top: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.olimp_card_img {
+    width: 38px;
+    height: 38px;
+    margin-right: 20px;
+}
+.olimp_card_intro_txt {
+    width: 690px;
+    display: flex;
+    flex-direction: column;
+}
+.card_olimp_title {
+    font-size: 34px;
+    font-weight: 700;
+    color: #2575FC;
+    text-transform: uppercase;
+}
+
+.olimp_card:nth-child(odd) .card_olimp_title{
+    color: #5D25FC;
+
+}
+
+.olimp_description {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.olimp_subtitle {
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: 400;
+    color: #2A222B;
+}
+.olimp_class {
+    font-size: 20px;
+    font-weight: 600;
+    color: hsla(0, 0%, 30%, 0.8);
+}
+.olimp_desc {
+    margin-top: 40px;
+}
+.description_criterion {
+    display: inline-block;
+    width: 292px;
+    color: hsla(0, 0%, 30%, 0.8);
+    font-size: 24px;
+    font-weight: 400;
+
+}
+.information_about_the_olimp {
+    color: #4C4C4C;
+    font-size: 24px;
+    font-weight: 600;
+}
+.classification_of_the_olympiad {
+    font-size: 24px;
+    font-weight: 400;
+    color: #4C4C4C;
+    margin-top: 53px;
+}
+.classification_of_the_olympiad .classificaiton_olimp_selection {
+    font-weight: 700;
+}
+.olimp_card_button_cont {
+    margin-top: 45px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.olimp_card_button_cont button {
+    height: 56px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
+    font-size: 22px;
+    color: #FFFFFF;
+    width: 19vw;
+    max-width: 362px;
+    border-radius: 20px;
+    background-color: #EE3035;
+    border: none;
+    transition: all .3s ease-in;
+    cursor: pointer;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.olimp_card_button_cont button:hover {
+    border: 1px solid hsla(0, 0%, 47%, 0.2);
+    background-color: #FFFFFF;
+    color: #2A222B;
+}
+
+
+
+
+
+.intro_search_cont {
+    position: relative;
+    margin-top: 40px;
+}
+
+.search_field {
+    width: 540px;
+    height: 46px;
+    padding-left: 20px;
+    color: #2E3136;
+    font-size: 16px;
+    background-color: #F4F3F4;
+    z-index: 1;
+    outline: none;
+    border: #777777 1px solid;
+    border-radius: 10px;
+    border: 1px solid hsla(0, 0%, 47%, 0.2);
+}
+
+.search_field::placeholder, .search_field::-webkit-input-placeholder, .search_field::-moz-placeholder {
+    font-size: 16px;
+    color: #2E3136;
+    opacity: .5;
+}
+
+.glass {
+    border: 0;
+    background-color: inherit;
+    position: absolute;
+    left: 501.67px;
+    top: 14px;
+    width: 15.83px;
+    height: 15.83px;
+    cursor: pointer;
+}
+
+.find_button {
+    width: 120px;
+    height: 44px;
+    background-color: #008ED5;
+    border-radius: 10px;
+    opacity: .7;
+    border: 0;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 20.37px;
+    color: #fff;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.reset_button {
+    margin-left: 20px;
+    border: 0;
+    background-color: inherit;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 20.37px;
+    color: #777777;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1700px) {
+
+.list-pages {
+    text-align: center;
+    margin: 0 0 20px 0;
+    }
+
+    .list-pages ul {
+        margin: 20px 0 0 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .list-pages ul li {
+        display: inline-block;
+        margin: 0 20px 0 0;
+    }
+
+    .list-pages a {
+        color: #000;
+        font-size: 24px;
+        text-decoration: none;
+    }
+
+    .list-pages .page-num, .page-num-selected {
+        display: inline-block;
+        width: 60px;
+        height: 60px;
+        padding: 16px 0 0 0;
+        border: 1px solid #d0d0d0;
+        border-radius: 40px;
+    }
+
+    .list-pages .page-num:hover {
+        box-shadow: 3px 3px 1px #d0d0d0;
+    }
+
+    .list-pages .page-num-selected {
+        border: none;
+        color: #000;
+        font-size: 20px;
+    }
+
+    .list-pages .page-num-selected:hover {
+        box-shadow: none;
+    }
+
+
+
+    .sub_card_title {
+        font-size: 16px;
+    }
+    .sub_card_class {
+        font-size: 14px;
+    }
+        .subject_card {
+    padding-left: 15px;
+    }
+    .olimp_card_button_cont button {
+        font-size: 18px;
+    }
+    .description_criterion {
+        font-size: 22px;
+        width: 240px;
+    }
+    .information_about_the_olimp {
+        font-size: 22px;
+    }
+    .classification_of_the_olympiad {
+        font-size: 22px;
+    }
+    .selected_olympiads {
+        margin-bottom: 100px;
+    }
+.list-pages {
+    text-align: center;
+    margin: 0 0 20px 0;
+    }
+
+    .list-pages ul {
+        margin: 20px 0 0 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .list-pages ul li {
+        display: inline-block;
+        margin: 0 20px 0 0;
+    }
+
+    .list-pages a {
+        color: #000;
+        font-size: 24px;
+        text-decoration: none;
+    }
+
+    .list-pages .page-num, .page-num-selected {
+        display: inline-block;
+        width: 60px;
+        height: 60px;
+        padding: 16px 0 0 0;
+        border: 1px solid #d0d0d0;
+        border-radius: 40px;
+    }
+
+    .list-pages .page-num:hover {
+        box-shadow: 3px 3px 1px #d0d0d0;
+    }
+
+    .list-pages .page-num-selected {
+        border: none;
+        color: #000;
+        font-size: 20px;
+    }
+
+    .list-pages .page-num-selected:hover {
+        box-shadow: none;
+    }
+}
+@media screen and (max-width: 1420px) {
+
+.list-pages {
+    text-align: center;
+    margin: 0 0 20px 0;
+    }
+
+    .list-pages ul {
+        margin: 20px 0 0 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .list-pages ul li {
+        display: inline-block;
+        margin: 0 20px 0 0;
+    }
+
+    .list-pages a {
+        color: #000;
+        font-size: 24px;
+        text-decoration: none;
+    }
+
+    .list-pages .page-num, .page-num-selected {
+        display: inline-block;
+        width: 60px;
+        height: 60px;
+        padding: 16px 0 0 0;
+        border: 1px solid #d0d0d0;
+        border-radius: 40px;
+    }
+
+    .list-pages .page-num:hover {
+        box-shadow: 3px 3px 1px #d0d0d0;
+    }
+
+    .list-pages .page-num-selected {
+        border: none;
+        color: #000;
+        font-size: 20px;
+    }
+
+    .list-pages .page-num-selected:hover {
+        box-shadow: none;
+    }
+
+    .li_of_av_title {
+        padding-top: 140px;
+        font-size: 34px;
+    }
+    .li_of_av_subtitle {
+        font-size: 18px;
+    }
+    .list_of_available_subj {
+        grid-template-columns: repeat(5, 1fr);
+        margin-bottom: 20px;
+    }
+    .show_olympiads {
+        padding-top: 20px;
+    }
+    .show_olimp label {
+        font-size: 16px;
+    }
+    .show_olimp button {
+        font-size: 16px;
+    }
+    .selected_olympiads {
+        margin-top: 20px;
+        margin-bottom: 80px;
+    }
+
+    .subject_card {
+        padding-left: 12px;
+    }
+    .subject_card img {
+        width: 34px;
+        height: 34px;
+        margin-right: 12px;
+    }
+    .description_criterion {
+        font-size: 20px;
+        width: 200px;
+    }
+    .information_about_the_olimp {
+        font-size: 20px;
+    }
+    .classification_of_the_olympiad {
+        font-size: 20px;
+    }
+    .olimp_subtitle {
+    font-size: 16px;
+    }
+    .olimp_class {
+        font-size: 18px;
+    }
+    .olimp_card_button_cont {
+        justify-content: space-around;
+    }
+    .olimp_card_button_cont button {
+        width: 18vw;
+    }
+
+    .intro_search_cont {
+        margin-top: 30px;
+    }
+
+    .search_field {
+        height: 42px;
+    }
+
+    .glass {
+        top: 12px;
+    }
+
+    .find_button {
+        height: 42px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .list_of_available_subj {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    .list-pages {
+    text-align: center;
+    margin: 0 0 20px 0;
+    }
+
+    .list-pages ul {
+        margin: 20px 0 0 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .list-pages ul li {
+        display: inline-block;
+        margin: 0 20px 0 0;
+    }
+
+    .list-pages a {
+        color: #000;
+        font-size: 24px;
+        text-decoration: none;
+    }
+
+    .list-pages .page-num, .page-num-selected {
+        display: inline-block;
+        width: 60px;
+        height: 60px;
+        padding: 16px 0 0 0;
+        border: 1px solid #d0d0d0;
+        border-radius: 40px;
+    }
+
+    .list-pages .page-num:hover {
+        box-shadow: 3px 3px 1px #d0d0d0;
+    }
+
+    .list-pages .page-num-selected {
+        border: none;
+        color: #000;
+        font-size: 20px;
+    }
+
+    .list-pages .page-num-selected:hover {
+        box-shadow: none;
+    }
+    .li_of_av_title {
+        padding-top: 120px;
+    }
+    .subject_card {
+        width: calc((100%/4)-10px);
+    }
+    .olimp_desc_line {
+        display: flex;
+        flex-direction: column;
+    }
+    .olimp_subtitle {
+    font-size: 14px;
+    }
+    .olimp_class {
+        font-size: 14px;
+    }
+    .olimp_card_button_cont button {
+        width: 17vw;
+    }
+}
+        /* Portrait tablets and small desktops */
+
+@media screen and (max-width: 1024px) {
+    .list_of_available_subj {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .list-pages {
+    text-align: center;
+    margin: 0 0 20px 0;
+    }
+
+    .list-pages ul {
+        margin: 20px 0 0 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .list-pages ul li {
+        display: inline-block;
+        margin: 0 20px 0 0;
+    }
+
+    .list-pages a {
+        color: #000;
+        font-size: 24px;
+        text-decoration: none;
+    }
+
+    .list-pages .page-num, .page-num-selected {
+        display: inline-block;
+        width: 60px;
+        height: 60px;
+        padding: 16px 0 0 0;
+        border: 1px solid #d0d0d0;
+        border-radius: 40px;
+    }
+
+    .list-pages .page-num:hover {
+        box-shadow: 3px 3px 1px #d0d0d0;
+    }
+
+    .list-pages .page-num-selected {
+        border: none;
+        color: #000;
+        font-size: 20px;
+    }
+
+    .list-pages .page-num-selected:hover {
+        box-shadow: none;
+    }
+
+    .subject_card {
+        width: calc((100%/3)-10px);
+    }
+        .olimp_desc_line {
+        display: flex;
+        flex-direction: column;
+    }
+    .olimp_subtitle {
+    font-size: 14px;
+    }
+    .olimp_class {
+        font-size: 14px;
+    }
+    .olimp_card_button_cont button {
+        width: 17vw;
+    }
+
+
+}
+@media screen and (max-width: 980px) {
+        .selected_olympiads {
+    grid-template-columns: 1fr;
+    }
+    .olimp_card {
+        height: auto;
+    }
+    .olimp_card_button_cont {
+        justify-content: space-between;
+    }
+    .olimp_card_button_cont button {
+        width: 39vw;
+        max-width: 362px;
+        font-size: 22px;
+    }
+    .olimp_subtitle {
+        font-size: 18px;
+    }
+    .olimp_class {
+        font-size: 20px;
+    }
+    .olimp_desc_line {
+        flex-direction: row;
+    }
+    .description_criterion {
+        font-size: 22px;
+        width: 280px;
+    }
+    .information_about_the_olimp {
+        font-size: 22px;
+    }
+    .classification_of_the_olympiad {
+        font-size: 22px;
+        margin-top: 40px;
+    }
+
+}
+        /* Landscape phones and portrait tablets */
+@media screen and (max-width: 768px) {
+    .list_of_available_subj {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .list-pages {
+    text-align: center;
+    margin: 0 0 20px 0;
+    }
+
+    .list-pages ul {
+        margin: 20px 0 0 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .list-pages ul li {
+        display: inline-block;
+        margin: 0 20px 0 0;
+    }
+
+    .list-pages a {
+        color: #000;
+        font-size: 20px;
+        text-decoration: none;
+    }
+
+    .list-pages .page-num, .page-num-selected {
+        display: inline-block;
+        width: 60px;
+        height: 60px;
+        padding: 16px 0 0 0;
+        border: 1px solid #d0d0d0;
+        border-radius: 40px;
+    }
+
+    .list-pages .page-num:hover {
+        box-shadow: 3px 3px 1px #d0d0d0;
+    }
+
+    .list-pages .page-num-selected {
+        border: none;
+        color: #000;
+        font-size: 20px;
+    }
+
+    .list-pages .page-num-selected:hover {
+        box-shadow: none;
+    }
+    .subject_card {
+        width: calc((100%/2)-10px);
+    }
+    .olimp_card {
+        height: auto;
+    }
+    .olimp_card_button_cont {
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+       .olimp_card_button_cont button {
+        width: 80vw;
+        font-size: 20px;
+    }
+    .olimp_card_button_cont button:first-child {
+        margin-bottom: 10px;
+    }
+    .olimp_desc_line {
+        display: flex;
+        flex-direction: column;
+    }
+    .olimp_subtitle {
+    font-size: 14px;
+    }
+    .olimp_class {
+        font-size: 14px;
+    }
+    .description_criterion {
+        font-size: 20px;
+        width: 200px;
+    }
+    .information_about_the_olimp {
+        font-size: 20px;
+    }
+    .classification_of_the_olympiad {
+        font-size: 20px;
+    }
+    .li_of_av_title {
+        font-size: 30px;
+    }
+    .li_of_av_subtitle {
+        font-size: 18px;
+    }
+    .selected_olympiads {
+        margin-bottom: 30px;
+    }
+    .intro_search_cont {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .intro_search_cont span:last-child {
+        margin-top: 10px;
+    }
+
+    .search_field {
+        width: 100%;
+    }
+
+    .glass {
+        left: 93%;
+    }
+
+    .find_button {
+        margin-left: 0;
+    }
+
+    .reset_button {
+        margin-left: 15px;
+    }
+
+}
+        /* Landscape phones and smaller */
+
+@media screen and (max-width: 480px) {
+    .li_of_av_title {
+        font-size: 24px;
+    }
+    .li_of_av_subtitle {
+        font-size: 16px;
+    }
+    .show_olimp label {
+        font-size: 14px;
+    }
+    .show_olimp button {
+        font-size: 14px;
+    }
+    .show_olympiads {
+        padding-top: 20px;
+    }
+    .list_of_available_subj {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px 10px;
+        margin-top: 20px;
+    }
+    .subject_card {
+        width: calc((100%/2)-5px);
+    }
+    .subject_card {
+        padding-left: 10px;
+    }
+    .subject_card img {
+        width: 30px;
+        height: 30px;
+        margin-right: 8px;
+    }
+    .sub_card_txt {
+        height: 40px;
+    }
+    .sub_card_title {
+        font-size: 14px;
+    }
+    .sub_card_class {
+        font-size: 12px;
+    }
+    .olimp_card_container {
+    margin-left: 20px;
+    margin-right: 20px;
+    }
+    .yellow_dot {
+        top: 20px;
+        right: 20px;
+    }
+    .olimp_card_intro {
+        padding-top: 20px;
+    }
+    .olimp_card_img {
+        width: 30px;
+        height: 30px;
+        margin-right: 10px;
+    }
+    .card_olimp_title {
+        font-size: 28px;
+    }
+    .description_criterion {
+        font-size: 16px;
+    }
+    .information_about_the_olimp {
+        font-size: 16px;
+    }
+    .olimp_subtitle {
+        font-size: 12px;
+    }
+    .olimp_class {
+        font-size: 12px;
+    }
+    .olimp_desc {
+        margin-top: 20px;
+    }
+    .classification_of_the_olympiad {
+        margin-top: 20px;
+        font-size: 16px;
+    }
+    .olimp_card_button_cont {
+        margin-top: 20px;
+    }
+    .olimp_card_button_cont button {
+        font-size: 18px;
+        height: 44px;
+        max-width: 280px;
+    }s
+    .list-pages {
+    text-align: center;
+    margin: 0 0 20px 0;
+    }
+
+    .list-pages ul {
+        margin: 20px 0 0 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .list-pages ul li {
+        display: inline-block;
+        margin: 0 10px 0 0;
+    }
+
+    .list-pages a {
+        color: #000;
+        font-size: 18px;
+        text-decoration: none;
+    }
+
+    .list-pages .page-num, .page-num-selected {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        padding: 16px 0 0 0;
+        border: 1px solid #d0d0d0;
+        border-radius: 40px;
+    }
+
+    .list-pages .page-num:hover {
+        box-shadow: 3px 3px 1px #d0d0d0;
+    }
+
+    .list-pages .page-num-selected {
+        border: none;
+        color: #000;
+        font-size: 20px;
+    }
+
+    .list-pages .page-num-selected:hover {
+        box-shadow: none;
+    }
+}
+
+
+
+@media screen and (max-width: 480px) {
+    .selection_from_the_list {
+        width: 200px;
+        font-size: 14px;
+    }
+}
+
+.selection_from_the_list {
+    width: 355px;
+    height: 34px;
+    border-radius: 10px;
+    outline: none;
+    padding-left: 12px;
+    border: 1px solid hsla(0, 0%, 47%, 0.3);
+    color: hsla(218, 9%, 20%, 0.7);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 18.11px;
+    background-color: #FFFFFF;
+}
+
+.selection_from_the_list option {
+    color: hsla(218, 9%, 20%, 0.7);
+}
+
+@media screen and (max-width: 480px) {
+    .olimp_choose_button {
+        margin-left: 0;
+        font-size: 14px;
+        width: 105px;
+    }
+}
+
+.olimp_choose_button {
+    margin-left: 10px;
+    width: 116px;
+    height: 34px;
+    background-color: #008ED5;
+    border-radius: 10px;
+    opacity: .7;
+    border: 0;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20.37px;
+    color: #fff;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 430px) {
+    .list-pages {
+    text-align: center;
+    margin: 0 0 20px 0;
+    }
+
+    .list-pages ul {
+        margin: 5px 0 0 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .list-pages ul li {
+        display: inline-block;
+        margin: 0 5px 0 0;
+    }
+
+    .list-pages a {
+        color: #000;
+        font-size: 15px;
+        text-decoration: none;
+    }
+
+    .list-pages .page-num, .page-num-selected {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        padding: 16px 0 0 0;
+        border: 1px solid #d0d0d0;
+        border-radius: 40px;
+    }
+
+    .list-pages .page-num:hover {
+        box-shadow: 3px 3px 1px #d0d0d0;
+    }
+
+    .list-pages .page-num-selected {
+        border: none;
+        color: #000;
+        font-size: 15px;
+    }
+
+    .list-pages .page-num-selected:hover {
+        box-shadow: none;
+    }
+}
+
+@media screen and (max-width: 655px) {
+    .list-pages {
+    text-align: center;
+    margin: 0 0 20px 0;
+    }
+
+    .list-pages ul {
+        margin: 5px 0 0 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .list-pages ul li {
+        display: inline-block;
+        margin: 0 20px 0 0;
+    }
+
+    .list-pages a {
+        color: #000;
+        font-size: 20px;
+        text-decoration: none;
+    }
+
+    .list-pages .page-num, .page-num-selected {
+        display: inline-block;
+        width: 35px;
+        height: 50px;
+        padding: 16px 0 0 0;
+        border: 1px solid #d0d0d0;
+        border-radius: 40px;
+    }
+
+    .list-pages .page-num:hover {
+        box-shadow: 3px 3px 1px #d0d0d0;
+    }
+
+    .list-pages .page-num-selected {
+        border: none;
+        color: #000;
+        font-size: 20px;
+    }
+
+    .list-pages .page-num-selected:hover {
+        box-shadow: none;
+    }
+}
+
+@media screen and (max-width: 460px) {
+    .list-pages {
+    text-align: center;
+    margin: 0 0 20px 0;
+    }
+
+    .list-pages ul {
+        margin: 5px 0 0 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .list-pages ul li {
+        display: inline-block;
+        margin: 0 10px 0 0;
+    }
+
+    .list-pages a {
+        color: #000;
+        font-size: 14px;
+        text-decoration: none;
+    }
+
+    .list-pages .page-num, .page-num-selected {
+        display: inline-block;
+        width: 27px;
+        height: 50px;
+        padding: 16px 0 0 0;
+        border: 1px solid #d0d0d0;
+        border-radius: 40px;
+    }
+
+    .list-pages .page-num:hover {
+        box-shadow: 3px 3px 1px #d0d0d0;
+    }
+
+    .list-pages .page-num-selected {
+        border: none;
+        color: #000;
+        font-size: 14px;
+    }
+
+    .list-pages .page-num-selected:hover {
+        box-shadow: none;
+    }
+}

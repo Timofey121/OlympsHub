@@ -1,0 +1,143 @@
+
+
+.register_form {
+    margin: 210px auto 70px;
+    max-width: 540px;
+    width: 80%;
+    border-radius: 20px;
+    background: #F8F8F8;
+    overflow: hidden;
+}
+
+.register_title_cont {
+    height: 100px;
+    width: 100%;
+    color: #2A222B;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 700;
+    background: #E8EBF2;
+    display: flex;
+}
+.register_title {
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 100%;
+    align-items: center;
+}
+
+.form_cont {
+    max-width: 410px;
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+}
+.input_title {
+    font-size: 18px;
+    color: rgba(42, 34, 43, 0.70);
+    margin-bottom: 8px;
+}
+.input_cont input {
+    height: 60px;
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid rgba(119, 119, 119, 0.30);
+    background: #FFF;
+    padding-left: 56px;
+    font-size: 20px;
+    outline: none;
+    color: #545352;
+}
+.input_cont input::placeholder, .input_cont input::-webkit-input-placeholder, .input_cont input::-moz-placeholder{
+    font-size: 20px;
+    color: #545352;
+}
+.input_cont input:focus {
+    border: 1px solid #777;
+}
+.input_cont {
+    margin-top: 24px;
+    position: relative;
+}
+.input_cont svg {
+    position: absolute;
+    top: 50px;
+    left: 20px;
+    width: 24px;
+    height: 24px;
+}
+.input_cont:first-child {
+    margin-top: 50px;
+}
+
+/* при ошибке из бэка */
+.input_cont input[name=""] {
+    border: 1px solid #EE3035;
+}
+
+/* стиль для label при ошибке */
+.label_for_input {
+    color: #EE3035;
+    font-size: 18px;
+    margin-top: 8px; 
+}
+
+
+.submit_button {
+    margin-top: 40px;
+    width: 100%;
+    border-radius: 10px;
+    height: 60px;
+    background-color: #EE3035;
+    font-size: 20px;
+    color: #FFF;
+    border: none;
+    transition: all .3s ease-in;
+}
+.submit_button:hover {
+    border: 1px solid hsla(0, 0%, 47%, 0.2);
+    background-color: #FFFFFF;
+    color: #2A222B;
+}
+.question {
+    margin-top: 60px;
+    font-size: 20px;
+    color: #2A222B;
+    margin-bottom: 60px;
+    text-align: center;
+}
+.question a {
+    color: #2575FC;
+}
+
+        
+@media screen and (max-width: 480px) {
+
+    .register_title_cont {
+        font-size: 18px;
+        height: 80px;
+    }
+    .input_cont:first-child {
+        margin-top: 30px;
+    }
+    .input_title {
+        font-size: 16px;
+    }
+    .input_cont {
+        margin-top: 18px;
+    }
+    .input_cont input {
+        font-size: 16px;
+    }
+.input_cont input::placeholder, .input_cont input::-webkit-input-placeholder, .input_cont input::-moz-placeholder{
+    font-size: 16px;
+    }
+    .submit_button {
+        font-size: 18px;
+        margin-top: 20px;
+    }
+    .question {
+        margin: 30px auto 40px;
+    }
+
+}
