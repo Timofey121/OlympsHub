@@ -46,7 +46,7 @@ services:
 
   nginx:
     restart: always
-    build: ./nginx
+    build: nginx
     depends_on:
       - django
     volumes:
