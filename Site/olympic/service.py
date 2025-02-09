@@ -31,11 +31,11 @@ def translate_english_letters_into_russian(text: str):
 
 def add_olympiads_to_bd():
     print('dsafbgn')
-    # subjects = 'Информатика, Математика, Физика, Химия, Биология, География, История, Обществознание, Право, ' \
-    #            'Экономика, Русский язык, Литература, Английский язык, ' \
-    #            'Французский язык, Немецкий язык, Астрономия, Робототехника, ' \
-    #            'Технология, Искусство, Черчение, Психология'.split(', ')
-    subjects = Subjects.objects.all()
+    subjects = 'Информатика, Математика, Физика, Химия, Биология, География, История, Обществознание, Право, ' \
+               'Экономика, Русский язык, Литература, Английский язык, ' \
+               'Французский язык, Немецкий язык, Астрономия, Робототехника, ' \
+               'Технология, Искусство, Черчение, Психология'.split(', ')
+    # subjects = Subjects.objects.all()
 
     vdisplay = Xvfb()
     vdisplay.start()
@@ -51,7 +51,7 @@ def add_olympiads_to_bd():
     time.sleep(1)
     for i in range(len(subjects)):
         try:
-            subject = subjects[i].subject
+            subject = subjects[i]
             sub_id = Subjects.objects.get(subject=subject).id
             data_start = ''
 
