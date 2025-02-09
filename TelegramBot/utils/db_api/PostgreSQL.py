@@ -251,7 +251,7 @@ async def del_olympic(title, start, stage, schedule, site, rsoch, sub):
     con.close()
 
 
-async def del_olympichub_in_olympiads_parsing(title, start, stage, schedule, site, rsoch, sub):
+async def del_olympic_in_olympiads_parsing(title, start, stage, schedule, site, rsoch, sub):
     main()
     cur.execute(
         f"DELETE FROM olympichub_olympiads WHERE title='{title}' AND start='{start}'"
