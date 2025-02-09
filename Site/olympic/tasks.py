@@ -2,9 +2,9 @@ import datetime
 
 from django.template.loader import render_to_string
 
+from .Site.celery import app
 from .models import RegistrationSite, UserNameAndTelegramID, NotificationDates, Olympiads, ResetPassword
 from .service import send_email, add_olympiads_to_bd
-from ..Site.celery import app
 
 
 @app.task()
