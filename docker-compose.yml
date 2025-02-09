@@ -32,17 +32,17 @@ services:
              python manage.py collectstatic --noinput &&
              gunicorn --bind 0.0.0.0:8000 Site.wsgi"
 
-    bot:
-      build: ./TelegramBot
-      restart: always
-      depends_on:
-        - postgres
-      env_file:
-        - .env.db
-        - TelegramBot/.env.tg
-      networks:
-        - my_network
-      command: [ "python", "main_olympiads.py" ]
+  bot:
+    build: ./TelegramBot
+    restart: always
+    depends_on:
+      - postgres
+    env_file:
+      - .env.db
+      - TelegramBot/.env.tg
+    networks:
+      - my_network
+    command: [ "python", "main_olympiads.py" ]
 
   nginx:
     restart: always
