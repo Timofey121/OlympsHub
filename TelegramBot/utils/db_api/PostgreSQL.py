@@ -8,12 +8,14 @@ from data.config import POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_
 
 def main():
     global con, cur
-
-    con = psycopg2.connect(user=POSTGRES_USER,
-                           # пароль, который указали при установке PostgreSQL
-                           password=POSTGRES_PASSWORD,
-                           host=POSTGRES_HOST,
-                           port=POSTGRES_PORT)
+    con = psycopg2.connect(
+        user=POSTGRES_USER,
+        password=POSTGRES_PASSWORD,
+        host=POSTGRES_HOST,
+        port=POSTGRES_PORT,
+        database=POSTGRES_DB
+    )
+    cur = con.cursor()
 
 async def add_user(telegram_id, full_name, blocked, data_registration):
     main()
