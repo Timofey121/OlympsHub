@@ -4,12 +4,12 @@ from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.types import ReplyKeyboardRemove
 
-from ...data.config import ADMINS
-from ...keyboards.default.buttons_menu import main_keyboard
-from ...keyboards.default.v_menu import buttons_menu
-from ...loader import dp
-from ...states import Test
-from ...utils.db_api.PostgreSQL import add_user_tech, subscriber_exists
+from data.config import ADMINS
+from keyboards.default.buttons_menu import main_keyboard
+from keyboards.default.v_menu import buttons_menu
+from loader import dp
+from states import Test
+from utils.db_api.PostgreSQL import add_user_tech, subscriber_exists
 
 
 @dp.message_handler(text="📝 Написать в тех поддержку", state=None)

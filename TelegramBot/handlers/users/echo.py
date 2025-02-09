@@ -1,7 +1,7 @@
 from aiogram import types  # подключение модуля для работы с сообщениями
 
-from ...keyboards.default.buttons_menu import main_keyboard
-from ...loader import dp  # подключение Dispatcher, подключенного к Telegram боту
+from keyboards.default.buttons_menu import main_keyboard
+from loader import dp  # подключение Dispatcher, подключенного к Telegram боту
 
 
 @dp.message_handler(state=None)

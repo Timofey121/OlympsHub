@@ -3,7 +3,7 @@ import sqlite3
 
 import psycopg2
 
-from ...data.config import POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_HOST, POSTGRES_PORT
+from data.config import POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_HOST, POSTGRES_PORT
 
 
 def main():

@@ -4,10 +4,10 @@ import datetime
 from aiogram import types
 from aiogram.dispatcher.filters import Command
 
-from ...data.config import ADMINS
-from ...keyboards.default.buttons_menu import main_keyboard
-from ...loader import dp
-from ...utils.db_api.PostgreSQL import subscriber_exists, add_user, count_users
+from data.config import ADMINS
+from keyboards.default.buttons_menu import main_keyboard
+from loader import dp
+from utils.db_api.PostgreSQL import subscriber_exists, add_user, count_users
 
 
 @dp.message_handler(Command("start"))

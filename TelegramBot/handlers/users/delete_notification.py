@@ -4,12 +4,12 @@ from aiogram.dispatcher import FSMContext
 from aiogram.types import ReplyKeyboardRemove
 from aiogram.utils.markdown import hbold, hlink, hunderline
 
-from ...keyboards.default.buttons_menu import main_keyboard
-from ...keyboards.inline.buttons_lessons_del_notif import inline_buttons_lessons_delete_notification
-from ...keyboards.inline.del_subject_or_choice import inline_buttons_delete
-from ...loader import dp
-from ...states import Test
-from ...utils.db_api.PostgreSQL import select_data_olimp_use_id, subscriber_exists, select_data_sub_info, \
+from keyboards.default.buttons_menu import main_keyboard
+from keyboards.inline.buttons_lessons_del_notif import inline_buttons_lessons_delete_notification
+from keyboards.inline.del_subject_or_choice import inline_buttons_delete
+from loader import dp
+from states import Test
+from utils.db_api.PostgreSQL import select_data_olimp_use_id, subscriber_exists, select_data_sub_info, \
     del_notif_in_olimpic, select_user, select_sub, del_data_in_olimpic, select_sub_id, select_data_olimp_use_subject
 
 

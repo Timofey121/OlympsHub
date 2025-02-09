@@ -5,11 +5,11 @@ from aiogram.dispatcher import FSMContext
 from aiogram.types import ReplyKeyboardRemove
 from aiogram.utils.markdown import hbold, hunderline, hlink
 
-from ...keyboards.default.buttons_menu import main_keyboard
-from ...keyboards.inline.all_or_choice_notification import inline_buttons_choose_notification
-from ...keyboards.inline.buttons_lessons_notification import inline_buttons_lessons_notification
-from ...loader import dp
-from ...utils.db_api.PostgreSQL import subscriber_exists, data_olympiads, add_notification_dates, select_data_infor_id, \
+from keyboards.default.buttons_menu import main_keyboard
+from keyboards.inline.all_or_choice_notification import inline_buttons_choose_notification
+from keyboards.inline.buttons_lessons_notification import inline_buttons_lessons_notification
+from loader import dp
+from utils.db_api.PostgreSQL import subscriber_exists, data_olympiads, add_notification_dates, select_data_infor_id, \
     del_olympic, del_olympic_in_olympiads_parsing, select_yes_or_no_in_notifications, select_sub_id, select_tg_or_site, \
     select_sub, select_user
 

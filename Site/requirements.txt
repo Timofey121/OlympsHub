@@ -18,3 +18,4 @@ xvfbwrapper
 gunicorn
 Django
 undetected-chromedriver
+celery
