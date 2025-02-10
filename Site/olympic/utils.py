@@ -5,8 +5,6 @@ menu = [{'title': "Главная страница", 'url_name': 'home'},
 additional_menu = [
     {'title': "Подключение/Удаление уведомлений", 'url_name': 'notification'},
     {'title': "Личный кабинет", 'url_name': 'account'},
-    {'title': "Синхронизация с Телеграмм Ботом", 'url_name': 'secret_token'},
-    {'title': "Выйти", 'url_name': 'logout'},
 ]
 
 
