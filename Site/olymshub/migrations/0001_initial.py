@@ -145,7 +145,7 @@ class Migration(migrations.Migration):
                 ('schedule', models.CharField(default='None', max_length=2000, verbose_name='Расписание олимпиады')),
                 ('site', models.CharField(default='None', max_length=2000, verbose_name='Сайт олимпиады')),
                 ('rsoch', models.BooleanField(max_length=2000, verbose_name='Входит ли в перечень?')),
-                ('sub', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='olympic.subjects', verbose_name='Предмет')),
+                ('sub', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='olymshub.subjects', verbose_name='Предмет')),
             ],
             options={
                 'verbose_name': 'Олимпиада',
@@ -164,7 +164,7 @@ class Migration(migrations.Migration):
                 ('schedule', models.CharField(default='None', max_length=2000, verbose_name='Расписание олимпиады')),
                 ('site', models.CharField(default='None', max_length=2000, verbose_name='Сайт олимпиады')),
                 ('rsoch', models.BooleanField(max_length=2000, verbose_name='Входит ли в перечень?')),
-                ('sub', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='olympic.subjects', verbose_name='Предмет')),
+                ('sub', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='olymshub.subjects', verbose_name='Предмет')),
             ],
             options={
                 'verbose_name': 'Подключенное уведомление',
