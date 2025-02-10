@@ -28,7 +28,7 @@ def pagination(search_olympiads, request):
 
 
 def main(request):
-    return render(request, 'olympic/main.html',
+    return render(request, 'olymshub/main.html',
                   {"menu": menu, "additional_menu": additional_menu, 'title': 'Главная страница'})
 
 
@@ -45,7 +45,7 @@ def AllOlympiads(request):
                     if not g.filter(title=itm.title, start=itm.start, sub_id=itm.sub).exists():
                         gen.append(itm)
                 page_obj, paginator = pagination(gen + list(g), request)
-                return render(request, 'olympic/information.html',
+                return render(request, 'olymshub/information.html',
                               {"menu": menu,
                                "additional_menu": additional_menu,
                                'title': 'Олимпиады',
@@ -58,7 +58,7 @@ def AllOlympiads(request):
                                })
 
             page_obj, paginator = pagination(NotificationDates.objects.filter(customer=usr).all(), request)
-            return render(request, 'olympic/information.html',
+            return render(request, 'olymshub/information.html',
                           {"menu": menu,
                            "additional_menu": additional_menu,
                            'title': 'Олимпиады',
@@ -70,7 +70,7 @@ def AllOlympiads(request):
                            })
 
     page_obj, paginator = pagination(Olympiads.objects.all(), request)
-    return render(request, 'olympic/information.html',
+    return render(request, 'olymshub/information.html',
                   {"menu": menu,
                    "additional_menu": additional_menu,
                    'title': 'Олимпиады',
@@ -97,7 +97,7 @@ def FilterOlympiads(request, sub_slug):
                         gen.append(itm)
 
                 page_obj, paginator = pagination(gen + list(g), request)
-                return render(request, 'olympic/information.html',
+                return render(request, 'olymshub/information.html',
                               {"menu": menu,
                                "additional_menu": additional_menu,
                                'title': f'Категория - {c.subject}',
@@ -110,7 +110,7 @@ def FilterOlympiads(request, sub_slug):
 
             page_obj, paginator = pagination(NotificationDates.objects.filter(customer=usr, sub__slug=sub_slug).all(),
                                              request)
-            return render(request, 'olympic/information.html',
+            return render(request, 'olymshub/information.html',
                           {"menu": menu,
                            "additional_menu": additional_menu,
                            'title': f'Категория - {c.subject}',
@@ -121,7 +121,7 @@ def FilterOlympiads(request, sub_slug):
                            'page_obj': page_obj,
                            })
     page_obj, paginator = pagination(Olympiads.objects.filter(sub__slug=sub_slug), request)
-    return render(request, 'olympic/information.html',
+    return render(request, 'olymshub/information.html',
                   {"menu": menu,
                    "additional_menu": additional_menu,
                    'title': f'Категория - {c.subject}',
@@ -163,7 +163,7 @@ def Notification(request):
                 search_olympiads += list(Olympiads.objects.filter(Q(sub__slug__contains=sub_slug)))
 
             page_obj, paginator = pagination(search_olympiads, request)
-            return render(request, 'olympic/notifications.html',
+            return render(request, 'olymshub/notifications.html',
                           {"menu": menu,
                            "additional_menu": additional_menu,
                            'title': 'Подключение/Удаление уведомлений',
@@ -174,7 +174,7 @@ def Notification(request):
                            })
 
         elif 'cancel' in request.POST:
-            return render(request, 'olympic/notifications.html',
+            return render(request, 'olymshub/notifications.html',
                           {"menu": menu,
                            "additional_menu": additional_menu,
                            'title': 'Подключение/Удаление уведомлений',
@@ -208,7 +208,7 @@ def Notification(request):
                 if NotificationDates.objects.filter(title=title, customer=usr, sub=sub).exists():
                     NotificationDates.objects.get(title=title, customer=usr, sub=sub).delete()
 
-    return render(request, 'olympic/notifications.html',
+    return render(request, 'olymshub/notifications.html',
                   {"menu": menu,
                    "additional_menu": additional_menu,
                    'title': 'Подключение/Удаление уведомлений',
@@ -220,7 +220,7 @@ def Notification(request):
 
 
 def account(request):
-    return render(request, 'olympic/account_page.html',
+    return render(request, 'olymshub/account_page.html',
                   {
                       "menu": menu,
                       "additional_menu": additional_menu,
@@ -235,14 +235,14 @@ def change_email(request):
         u = RegistrationSite.objects.get(customer=request.user.username)
         u.email = new_email
         u.save()
-        return render(request, 'olympic/account_page.html',
+        return render(request, 'olymshub/account_page.html',
                       {
                           "menu": menu,
                           "additional_menu": additional_menu,
                           'title': 'Личный кабинет',
                           'email': RegistrationSite.objects.get(customer=request.user.username).email
                       })
-    return render(request, 'olympic/change_email.html', {
+    return render(request, 'olymshub/change_email.html', {
         "menu": menu,
         "additional_menu": additional_menu,
         'title': 'Сброс Пароля',
@@ -264,12 +264,12 @@ def password_reset(request):
                 'username': usr.customer,
                 'url': reset_url,
             }
-            html_body = render_to_string('olympic/email_templates/reset_password.html', data)
+            html_body = render_to_string('olymshub/email_templates/reset_password.html', data)
             now = datetime.datetime.now().strftime('%Y-%m-%d')
             ResetPassword.objects.create(customer=usr.customer, token=tkn, data_created=now)
-            send_span_email.delay('Сброс-Пароля-[olympic]', usr.email, html_body)
+            send_span_email.delay('Сброс-Пароля-[olymshub]', usr.email, html_body)
             return redirect('login')
-    return render(request, 'olympic/password_reset.html', {
+    return render(request, 'olymshub/password_reset.html', {
         "menu": menu,
         "additional_menu": additional_menu,
         'title': 'Сброс Пароля',
@@ -288,7 +288,7 @@ def password_reset_for_usr(request, token):
         u.save()
         ResetPassword.objects.get(token=token).delete()
         return redirect('login')
-    return render(request, 'olympic/password_reset_for_usr.html',
+    return render(request, 'olymshub/password_reset_for_usr.html',
                   {"menu": menu,
                    "additional_menu": additional_menu,
                    'title': 'Сброс Пароля',
@@ -313,7 +313,7 @@ def token(request):
             UserNameAndTelegramID.objects.filter(customer=request.user).delete()
     usr = request.user.username
     flag = UserNameAndTelegramID.objects.filter(customer=usr).exists()
-    return render(request, 'olympic/secret_token_pager.html',
+    return render(request, 'olymshub/secret_token_pager.html',
                   {"menu": menu,
                    "additional_menu": additional_menu,
                    'title': 'Синхронизация с Телеграмм Ботом',
@@ -325,7 +325,7 @@ def token(request):
 
 class RegisterUser(DataMixin, CreateView):
     form_class = RegisterForm
-    template_name = 'olympic/register.html'
+    template_name = 'olymshub/register.html'
     success_url = reverse_lazy('login')
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -344,7 +344,7 @@ class RegisterUser(DataMixin, CreateView):
 
 class LoginUser(DataMixin, LoginView):
     form_class = LoginUserForm
-    template_name = 'olympic/login.html'
+    template_name = 'olymshub/login.html'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -364,6 +364,6 @@ def error_404(request, exception):
     context = {}
     context['page_title'] = '404'
     context['menu'] = menu
-    response = render(request, 'olympic/404.html', context=context)
+    response = render(request, 'olymshub/404.html', context=context)
     response.status_code = 404
     return response

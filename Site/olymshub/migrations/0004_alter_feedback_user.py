@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('olympic', '0003_alter_resetpassword_data_created'),
+        ('olymshub', '0003_alter_resetpassword_data_created'),
     ]
 
     operations = [
