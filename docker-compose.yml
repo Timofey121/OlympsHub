@@ -61,50 +61,50 @@ services:
       - my_network
 
 
-#  redis:
-#    image: "redis:alpine"
-#    restart: always
-#    networks:
-#      - my_network
+  redis:
+    image: "redis:alpine"
+    restart: always
+    networks:
+      - my_network
 
-#  flower:
-#    image: mher/flower
-#    environment:
-#      - FLOWER_PORT=5555
-#      - CELERY_BROKER_URL=redis://redis:6379/0
-#    ports:
-#      - "5555:5555"
-#    networks:
-#      - my_network
-#
-#  worker:
-#    restart: always
-#    build: ./Site
-#    volumes:
-#      - .:/usr/src/app
-#    depends_on:
-#      - redis
-#      - django
-#    env_file:
-#      - .env.db
-#    command: 'celery -A Site worker -l info'
-#    networks:
-#      - my_network
-#
-#  beat:
-#    restart: always
-#    build: ./Site
-#    volumes:
-#      - .:/usr/src/app
-#    depends_on:
-#      - redis
-#      - django
-#      - worker
-#    env_file:
-#      - .env.db
-#    command: 'celery -A Site beat -l info'
-#    networks:
-#      - my_network
+  flower:
+    image: mher/flower
+    environment:
+      - FLOWER_PORT=5555
+      - CELERY_BROKER_URL=redis://redis:6379/0
+    ports:
+      - "5555:5555"
+    networks:
+      - my_network
+
+  worker:
+    restart: always
+    build: ./Site
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - redis
+      - django
+    env_file:
+      - .env.db
+    command: 'celery -A Site worker -l info'
+    networks:
+      - my_network
+
+  beat:
+    restart: always
+    build: ./Site
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - redis
+      - django
+      - worker
+    env_file:
+      - .env.db
+    command: 'celery -A Site beat -l info'
+    networks:
+      - my_network
 
 
 volumes:
