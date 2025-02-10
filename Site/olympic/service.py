@@ -1,3 +1,4 @@
+import datetime
 import time
 
 import requests
@@ -35,7 +36,6 @@ def add_olympiads_to_bd():
                'Экономика, Русский язык, Литература, Английский язык, ' \
                'Французский язык, Немецкий язык, Астрономия, Робототехника, ' \
                'Технология, Искусство, Черчение, Психология'.split(', ')
-    # subjects = Subjects.objects.all()
 
     vdisplay = Xvfb()
     vdisplay.start()
@@ -51,12 +51,11 @@ def add_olympiads_to_bd():
     time.sleep(1)
     for i in range(len(subjects)):
         try:
-            subject = subjects[i]
-            sub_id = Subjects.objects.get(subject=subject).id
+            sub_id = Subjects.objects.get(subject=subjects[i]).id
             data_start = ''
 
-            URL = (f'https://olimpiada.ru/activities?type=any&subject%5B{numbers[subject].strip().capitalize()}'
-                   f'%5D=on&class=any&period_date=&period=week')
+            URL = f'https://olimpiada.ru/activities?type=any&subject%5B{numbers[subjects[i].strip().capitalize()]}' \
+                  f'%5D=on&class=any&period_date=&period=week'
             driver.get(URL)
 
             while 'Проверка браузера перед переходом на сайт olimpiada.ru' in driver.page_source:
@@ -114,7 +113,7 @@ def add_olympiads_to_bd():
                         stage = step
                         schedule = fg
                         site = href_olimp
-                        f = (title in subjects_rsosh[subject.lower().capitalize()])
+                        f = (title in subjects_rsosh[subjects[i].lower().capitalize()])
                         Olympiads.objects.create(title=title, start=start, stage=stage, schedule=schedule,
                                                  site=site, rsoch=f, sub_id=sub_id).save()
                         for tg in NotificationDates.objects.filter(sub_id=sub_id).all():
