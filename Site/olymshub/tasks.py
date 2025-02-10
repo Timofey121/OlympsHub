@@ -30,7 +30,7 @@ def send_notification_email():
                 if flag is True and flag1 is True:
                     final_notifications.append(notif)
             if len(final_notifications) > 0:
-                html_body = render_to_string('olympic/email_templates/email_notification.html', {
+                html_body = render_to_string('olymshub/email_templates/email_notification.html', {
                     'notification': final_notifications,
                 })
                 send_email('Подключенные уведомления', user.email, html_body)

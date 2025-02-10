@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('olympic', '0004_alter_feedback_user'),
+        ('olymshub', '0004_alter_feedback_user'),
     ]
 
     operations = [
