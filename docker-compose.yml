@@ -61,11 +61,11 @@ services:
       - my_network
 
 
-  redis:
-    image: "redis:alpine"
-    restart: always
-    networks:
-      - my_network
+#  redis:
+#    image: "redis:alpine"
+#    restart: always
+#    networks:
+#      - my_network
 
 #  flower:
 #    image: mher/flower
