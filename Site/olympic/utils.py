@@ -4,7 +4,6 @@ menu = [{'title': "Главная страница", 'url_name': 'home'},
 
 additional_menu = [
     {'title': "Подключение/Удаление уведомлений", 'url_name': 'notification'},
-    {'title': "Личный кабинет", 'url_name': 'account'},
 ]
 
 
