@@ -12,15 +12,15 @@ app.autodiscover_tasks()
 
 app.conf.beat_schedule = {
     'send-notification': {
-        'task': 'olymshub.tasks.send_notification_email',
+        'task': 'olympic.tasks.send_notification_email',
         'schedule': crontab(hour='*/12')
     },
     'delete_token': {
-        'task': 'olymshub.tasks.delete_token_in_bd',
+        'task': 'olympic.tasks.delete_token_in_bd',
         'schedule': crontab(hour='*/24')
     },
     'add_olympiads': {
-        'task': 'olymshub.tasks.add_olympiads',
+        'task': 'olympic.tasks.add_olympiads',
         'schedule': crontab(hour='*/60')
     },
 }

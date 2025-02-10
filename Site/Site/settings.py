@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'olymshub.apps.OlympicConfig',
+    'olympic.apps.OlympicConfig',
     'django_celery_beat',
 ]
 
@@ -63,7 +63,7 @@ ROOT_URLCONF = 'Site.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'olymshub/templates']
+        'DIRS': [BASE_DIR / 'olympic/templates']
         ,
         'APP_DIRS': True,
         'OPTIONS': {
