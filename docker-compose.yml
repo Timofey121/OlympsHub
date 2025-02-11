@@ -87,7 +87,7 @@ services:
       - postgres
     env_file:
       - .env.db
-    command: 'celery -A Site worker -l info'
+    command: 'celery -A Site worker -l info -E'
     networks:
       - my_network
 
@@ -103,7 +103,7 @@ services:
       - postgres
     env_file:
       - .env.db
-    command: 'celery -A Site worker -l info'
+    command: 'celery -A Site beat -l info'
     networks:
       - my_network
 
