@@ -4,7 +4,6 @@ WORKDIR /usr/src/app
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
-ENV PATH="/usr/local/bin:${PATH}"
 
 # Обновляем систему и устанавливаем зависимости
 RUN apt-get update && \
@@ -12,10 +11,15 @@ RUN apt-get update && \
     apt-get install -y postgresql gcc python3-dev musl-dev wget gnupg2 unzip netcat-traditional nginx gunicorn xvfb
 
 # Установка Google Chrome и Chromedriver
-RUN wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip && \
-    unzip /tmp/chromedriver.zip -d /usr/local/bin/ && \
-    rm /tmp/chromedriver.zip && \
-    chmod +x /usr/local/bin/chromedriver
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
+    echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list && \
+    apt-get update && \
+    apt-get install -y google-chrome-stable && \
+    LATEST=$(wget -q -O - http://chromedriver.storage.googleapis.com/LATEST_RELEASE) && \
+    wget http://chromedriver.storage.googleapis.com/$LATEST/chromedriver_linux64.zip && \
+    unzip chromedriver_linux64.zip && \
+    rm chromedriver_linux64.zip && \
+    mv chromedriver /usr/local/bin/
 
 
 # Обновляем pip и устанавливаем зависимости
@@ -50,7 +54,6 @@ COPY . $APP_HOME
 RUN chown -R app:app $APP_HOME
 
 RUN chmod -R 777 /home/app
-ENV WDM_LOCAL=/usr/local/bin
 
 # Переходим к пользователю app
 USER app
