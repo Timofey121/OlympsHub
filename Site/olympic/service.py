@@ -34,6 +34,7 @@ def add_olympiads_to_bd():
     subjects = Subjects.objects.all()
 
     chrome_options = undetected_chromedriver.ChromeOptions()
+    chrome_options.binary_location = "/usr/bin/google-chrome-stable"
     chrome_options.add_argument("--headless=new")  # Новый headless-режим (рекомендуется для Chrome 112+)
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument("--disable-dev-shm-usage")  # Решение для ограниченной памяти в контейнерах
