@@ -60,7 +60,6 @@ services:
     networks:
       - my_network
 
-
   redis:
     image: "redis:alpine"
     restart: always
@@ -87,7 +86,9 @@ services:
       - django
     env_file:
       - .env.db
-    command: 'celery -A Site worker -l info'
+    command: >
+      sh -c "./wait-for-postgres.sh postgres &&
+           celery -A Site worker -l info"
     networks:
       - my_network
 
@@ -102,7 +103,9 @@ services:
       - worker
     env_file:
       - .env.db
-    command: 'celery -A Site beat -l info'
+    command: >
+      sh -c "./wait-for-postgres.sh postgres &&
+             celery -A Site beat -l info"
     networks:
       - my_network
 
