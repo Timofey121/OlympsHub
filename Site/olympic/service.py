@@ -34,7 +34,6 @@ def add_olympiads_to_bd():
     subjects = Subjects.objects.all()
 
     chrome_options = undetected_chromedriver.ChromeOptions()
-    chrome_options.binary_location = "/usr/bin/google-chrome-stable"
     chrome_options.add_argument("--headless=new")  # Новый headless-режим (рекомендуется для Chrome 112+)
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument("--disable-dev-shm-usage")  # Решение для ограниченной памяти в контейнерах
@@ -42,7 +41,7 @@ def add_olympiads_to_bd():
     chrome_options.add_argument("--disable-extensions")  # Отключение расширений
     chrome_options.add_argument("--remote-debugging-port=9222")  # Порт для удаленной отладки
     chrome_options.add_argument("--window-size=1920,1080")  # Установка размера окна (важно для некоторых сайтов)
-    service = ChromeService(ChromeDriverManager().install())
+    service = ChromeService(ChromeDriverManager(path="/usr/local/bin").install())  # Указываем путь!
 
     driver = undetected_chromedriver.Chrome(service=service, options=chrome_options)
 
