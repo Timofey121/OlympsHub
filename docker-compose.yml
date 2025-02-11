@@ -87,7 +87,7 @@ services:
     env_file:
       - .env.db
     command: >
-      sh -c "./entrypoint.sh postgres && celery -A Site worker -l info"
+      sh -c "./entrypoint.sh && celery -A Site worker -l info"
     networks:
       - my_network
 
@@ -103,7 +103,7 @@ services:
     env_file:
       - .env.db
     command: >
-      sh -c "./entrypoint.sh postgres && celery -A Site beat -l info"
+      sh -c "./entrypoint.sh && celery -A Site beat -l info"
     networks:
       - my_network
 
