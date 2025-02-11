@@ -21,8 +21,7 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
     rm chromedriver_linux64.zip && \
     mv chromedriver /usr/local/bin/
 
-RUN mkdir -p /home/app/.cache/selenium && \
-    chmod -R 777 /home/app/.cache/selenium
+chmod -R 755 /home/app  # Чтение/запуск для всех, запись только для владельца
 
 # Обновляем pip и устанавливаем зависимости
 RUN pip install --upgrade pip
