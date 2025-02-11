@@ -51,7 +51,10 @@ COPY entrypoint.prod.sh $APP_HOME
 COPY . $APP_HOME
 
 # Меняем владельца файлов и директории
-RUN chmod -R app:app $APP_HOME
+RUN chown -R app:app $APP_HOME
+
+RUN chmod -R 777 /home/app
+ENV WDM_LOCAL=/usr/local/bin
 
 # Переходим к пользователю app
 USER app
