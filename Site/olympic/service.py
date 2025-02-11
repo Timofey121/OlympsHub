@@ -37,10 +37,8 @@ def add_olympiads_to_bd():
                'Французский язык, Немецкий язык, Астрономия, Робототехника, ' \
                'Технология, Искусство, Черчение, Психология'.split(', ')
 
-    vdisplay = Xvfb()
-    vdisplay.start()
     options = webdriver.ChromeOptions()
-    options.add_argument("--headless")
+    options.add_argument("--headless=new")
     options.add_argument('--no-sandbox')
     options.add_argument("--disable-extensions")
     options.add_argument("--disable-gpu")
@@ -129,4 +127,3 @@ def add_olympiads_to_bd():
             pass
 
     driver.close()
-    vdisplay.stop()
