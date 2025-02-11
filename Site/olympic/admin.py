@@ -3,10 +3,7 @@ from django.contrib import admin
 from olympic.models import RegistrationSite, RegistrationTelegram, Olympiads, NotificationDates, Feedback, \
     TechnicalSupport, Payment, \
     Subjects, SecretToken, UserNameAndTelegramID, ResetPassword
-from django_celery_beat.models import PeriodicTask, IntervalSchedule, CrontabSchedule
 
-
-# Register your models here.
 
 class RegistrationSiteAdmin(admin.ModelAdmin):
     list_display = ('customer', 'email', 'blocked', 'data_registration')  # отображение этих в полей
@@ -103,8 +100,3 @@ admin.site.register(Payment, PaymentAdmin)
 admin.site.register(Subjects, SubjectsAdmin)
 admin.site.register(SecretToken, SecretTokenAdmin)
 admin.site.register(UserNameAndTelegramID, UserNameAndTelegramIDAdmin)
-
-
-admin.site.register(PeriodicTask)
-admin.site.register(IntervalSchedule)
-admin.site.register(CrontabSchedule)
