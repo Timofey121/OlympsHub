@@ -1,30 +1,25 @@
 import time
 
 import requests
+import undetected_chromedriver
 from bs4 import BeautifulSoup
 from django.core.mail import send_mail
-from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
 
 from .models import Subjects, Olympiads, NotificationDates
 from .templates.dictionary import numbers, months, months2, subjects_rsosh
 
 
 def send_email(name_email, user, body):
-    send_mail(
-        name_email,
-        '',
-        'from@example.com',
-        [user],
-        html_message=body,
-        fail_silently=False,
-    )
+    send_mail(name_email, '', 'from@example.com', [user],
+              html_message=body, fail_silently=False, )
 
 
 def translate_english_letters_into_russian(text: str):
     layout = dict(zip(map(ord, "qwertyuiop[]asdfghjkl;'zxcvbnm,./`"
-                               'QWERTYUIOP{}ASDFGHJKL:"ZXCVBNM<>?~'),
-                      "йцукенгшщзхъфывапролджэячсмитьбю.ё"
-                      'ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ,Ё'))
+                               'QWERTYUIOP{}ASDFGHJKL:"ZXCVBNM<>?~'), "йцукенгшщзхъфывапролджэячсмитьбю.ё"
+                                                                      'ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ,Ё'))
     return text.translate(layout)
 
 
@@ -37,15 +32,18 @@ def add_olympiads_to_bd():
 
     subjects = Subjects.objects.all()
 
-    options = webdriver.ChromeOptions()
-    options.add_argument("--headless=new")  # Новый headless-режим (рекомендуется для Chrome 112+)
-    options.add_argument('--no-sandbox')
-    options.add_argument("--disable-dev-shm-usage")  # Решение для ограниченной памяти в контейнерах
-    options.add_argument("--disable-gpu")  # Отключение GPU, так как он не нужен в headless-режиме
-    options.add_argument("--disable-extensions")  # Отключение расширений
-    options.add_argument("--remote-debugging-port=9222")  # Порт для удаленной отладки
-    options.add_argument("--window-size=1920,1080")  # Установка размера окна (важно для некоторых сайтов)
-    driver = webdriver.Chrome(options=options)
+    chrome_options = undetected_chromedriver.ChromeOptions()
+    chrome_options.add_argument("--headless=new")  # Новый headless-режим (рекомендуется для Chrome 112+)
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument("--disable-dev-shm-usage")  # Решение для ограниченной памяти в контейнерах
+    chrome_options.add_argument("--disable-gpu")  # Отключение GPU, так как он не нужен в headless-режиме
+    chrome_options.add_argument("--disable-extensions")  # Отключение расширений
+    chrome_options.add_argument("--remote-debugging-port=9222")  # Порт для удаленной отладки
+    chrome_options.add_argument("--window-size=1920,1080")  # Установка размера окна (важно для некоторых сайтов)
+    service = ChromeService(ChromeDriverManager().install())
+
+    chrome_driver = undetected_chromedriver.Chrome(service=service, options=chrome_options)
+    driver = undetected_chromedriver.Chrome(options=chrome_options)
 
     time.sleep(1)
     for i in range(len(subjects)):
@@ -53,7 +51,6 @@ def add_olympiads_to_bd():
             subject = subjects[i]
             print("Parse " + subject.name)
             sub_id = Subjects.objects.get(subject=subject).id
-            data_start = ''
 
             URL = f'https://olimpiada.ru/activities?type=any&subject%5B{numbers[subject.strip().capitalize()]}' \
                   f'%5D=on&class=any&period_date=&period=week'
@@ -91,10 +88,11 @@ def add_olympiads_to_bd():
                         soup = BeautifulSoup(src, "lxml")
 
                         step = soup.find('div', 'right').find('h1').text
-                        data_start1 = (soup.find('span', 'main_date red').text.strip().replace('\n', '')
-                                       .replace('20', ' 20').replace('!', '').replace('До', '')
-                                       ).strip().replace(' ', ' ').split('...')[0]
+                        data_start1 = (soup.find('span', 'main_date red').text.strip().replace('\n', '').replace('20',
+                                                                                                                 ' 20').replace(
+                            '!', '').replace('До', '')).strip().replace(' ', ' ').split('...')[0]
 
+                        data_start = ''
                         for item2 in months2:
                             if item2 in data_start1:
                                 data_start1 = data_start1.split(item2.strip())
@@ -115,8 +113,9 @@ def add_olympiads_to_bd():
                         schedule = fg
                         site = href_olimp
                         f = (title in subjects_rsosh[subject.lower().capitalize()])
-                        Olympiads.objects.create(title=title, start=start, stage=stage, schedule=schedule,
-                                                 site=site, rsoch=f, sub_id=sub_id).save()
+                        Olympiads.objects.create(title=title, start=start, stage=stage, schedule=schedule, site=site,
+                                                 rsoch=f, sub_id=sub_id).save()
+
                         for tg in NotificationDates.objects.filter(sub_id=sub_id).all():
                             if NotificationDates.objects.filter(tg.customer, title, start, stage, schedule, site, f,
                                                                 sub_id).exists():
