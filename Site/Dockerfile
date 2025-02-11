@@ -23,8 +23,6 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
 
 RUN mkdir -p /home/app/.cache/selenium && \
     chmod -R 777 /home/app/.cache/selenium
-RUN mkdir -p /home/app/.wdm && \
-    chmod -R 777 /home/app/.wdm \
 
 # Обновляем pip и устанавливаем зависимости
 RUN pip install --upgrade pip

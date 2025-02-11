@@ -1,3 +1,4 @@
+import os
 import time
 
 import requests
@@ -25,6 +26,11 @@ def translate_english_letters_into_russian(text: str):
 
 def add_olympiads_to_bd():
     print('Run parsing')
+
+    # Указываем папку для кеша драйвера внутри контейнера, где у Celery есть доступ
+    os.environ["WDM_LOCAL"] = "1"
+    os.environ["WDM_CACHE"] = "/tmp/.wdm"
+
     # subjects = 'Информатика, Математика, Физика, Химия, Биология, География, История, Обществознание, Право, ' \
     #            'Экономика, Русский язык, Литература, Английский язык, ' \
     #            'Французский язык, Немецкий язык, Астрономия, Робототехника, ' \
