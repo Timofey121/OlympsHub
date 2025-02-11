@@ -46,6 +46,7 @@ def add_olympiads_to_bd():
     options.add_argument("--remote-debugging-port=9222")  # Порт для удаленной отладки
     options.add_argument("--window-size=1920,1080")  # Установка размера окна (важно для некоторых сайтов)
     driver = webdriver.Chrome(options=options)
+
     time.sleep(1)
     for i in range(len(subjects)):
         try:

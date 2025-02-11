@@ -181,7 +181,7 @@ async def subject_to_bd():
 async def main():
     while True:
         start = datetime.datetime.now()
-        await subject_to_bd()
+        # await subject_to_bd()
         with open('additional_files/log.txt', 'w') as f:
             f.write(f"{datetime.datetime.today().date()};{str(datetime.datetime.now() - start).split('.')[0]}")
         await asyncio.sleep(432000)
