@@ -42,7 +42,7 @@ def add_olympiads_to_bd():
     chrome_options.add_argument("--disable-extensions")  # Отключение расширений
     chrome_options.add_argument("--remote-debugging-port=9222")  # Порт для удаленной отладки
     chrome_options.add_argument("--window-size=1920,1080")  # Установка размера окна (важно для некоторых сайтов)
-    service = ChromeService(ChromeDriverManager(path="/usr/local/bin").install())  # Указываем путь!
+    service = ChromeService(ChromeDriverManager().install())
 
     driver = undetected_chromedriver.Chrome(service=service, options=chrome_options)
 

@@ -54,6 +54,7 @@ COPY . $APP_HOME
 RUN chown -R app:app $APP_HOME
 
 RUN chmod -R 777 /home/app
+ENV WDM_LOCAL=/usr/local/bin
 
 # Переходим к пользователю app
 USER app
