@@ -1,4 +1,3 @@
-import os
 import time
 
 import requests
@@ -44,8 +43,7 @@ def add_olympiads_to_bd():
     chrome_options.add_argument("--window-size=1920,1080")  # Установка размера окна (важно для некоторых сайтов)
     service = ChromeService(ChromeDriverManager().install())
 
-    chrome_driver = undetected_chromedriver.Chrome(service=service, options=chrome_options)
-    driver = undetected_chromedriver.Chrome(options=chrome_options)
+    driver = undetected_chromedriver.Chrome(service=service, options=chrome_options)
 
     time.sleep(1)
     for i in range(len(subjects)):
