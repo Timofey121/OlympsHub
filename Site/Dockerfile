@@ -59,7 +59,7 @@ USER app
 # Разрешаем выполнение entrypoint скрипта
 RUN chmod +x entrypoint.prod.sh
 
-chmod -R 755 /home/app  # Чтение/запуск для всех, запись только для владельца
+RUN chmod -R 755 /home/app  # Чтение/запуск для всех, запись только для владельца
 
 # Определяем точку входа
 ENTRYPOINT ["/home/app/web/entrypoint.prod.sh"]
