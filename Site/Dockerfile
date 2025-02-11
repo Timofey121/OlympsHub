@@ -53,13 +53,14 @@ COPY . $APP_HOME
 # Меняем владельца файлов и директории
 RUN chown -R app:app $APP_HOME
 
+RUN chmod -R 755 /home/app
+
 # Переходим к пользователю app
 USER app
 
 # Разрешаем выполнение entrypoint скрипта
 RUN chmod +x entrypoint.prod.sh
 
-RUN chmod -R 755 /home/app  # Чтение/запуск для всех, запись только для владельца
 
 # Определяем точку входа
 ENTRYPOINT ["/home/app/web/entrypoint.prod.sh"]
