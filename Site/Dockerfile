@@ -11,15 +11,13 @@ RUN apt-get update && \
     apt-get install -y postgresql gcc python3-dev musl-dev wget gnupg2 unzip netcat-traditional nginx gunicorn xvfb
 
 # Установка Google Chrome и Chromedriver
-RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
-    echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list && \
-    apt-get update && \
-    apt-get install -y google-chrome-stable && \
-    LATEST=$(wget -q -O - http://chromedriver.storage.googleapis.com/LATEST_RELEASE) && \
-    wget http://chromedriver.storage.googleapis.com/$LATEST/chromedriver_linux64.zip && \
-    unzip chromedriver_linux64.zip && \
-    rm chromedriver_linux64.zip && \
-    mv chromedriver /usr/local/bin/
+RUN CHROME_VERSION=$(google-chrome --version | awk '{print $3}') \
+    CHROME_MAJOR_VERSION=$(echo $CHROME_VERSION | cut -d'.' -f1) \
+    CHROMEDRIVER_VERSION=$(wget -q -O - "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_MAJOR_VERSION")\
+    wget -O /tmp/chromedriver.zip "https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"\
+    unzip /tmp/chromedriver.zip -d /usr/local/bin/ \
+    rm /tmp/chromedriver.zip \
+    chmod +x /usr/local/bin/chromedriver
 
 
 # Обновляем pip и устанавливаем зависимости
@@ -52,12 +50,10 @@ COPY . $APP_HOME
 
 # Меняем владельца файлов и директории
 RUN chown -R app:app $APP_HOME
-
+RUN chmod -R 777 /home/app
 
 # Переходим к пользователю app
 USER app
-
-RUN chmod -R 777 /home/app
 
 # Разрешаем выполнение entrypoint скрипта
 RUN chmod +x entrypoint.prod.sh
