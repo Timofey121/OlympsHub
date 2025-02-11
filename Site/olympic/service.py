@@ -1,11 +1,9 @@
-import datetime
 import time
 
 import requests
 from bs4 import BeautifulSoup
 from django.core.mail import send_mail
 from selenium import webdriver
-from xvfbwrapper import Xvfb
 
 from .models import Subjects, Olympiads, NotificationDates
 from .templates.dictionary import numbers, months, months2, subjects_rsosh
@@ -31,11 +29,13 @@ def translate_english_letters_into_russian(text: str):
 
 
 def add_olympiads_to_bd():
-    print('dsafbgn')
-    subjects = 'Информатика, Математика, Физика, Химия, Биология, География, История, Обществознание, Право, ' \
-               'Экономика, Русский язык, Литература, Английский язык, ' \
-               'Французский язык, Немецкий язык, Астрономия, Робототехника, ' \
-               'Технология, Искусство, Черчение, Психология'.split(', ')
+    print('Run parsing')
+    # subjects = 'Информатика, Математика, Физика, Химия, Биология, География, История, Обществознание, Право, ' \
+    #            'Экономика, Русский язык, Литература, Английский язык, ' \
+    #            'Французский язык, Немецкий язык, Астрономия, Робототехника, ' \
+    #            'Технология, Искусство, Черчение, Психология'.split(', ')
+
+    subjects = Subjects.objects.all()
 
     options = webdriver.ChromeOptions()
     options.add_argument("--headless=new")
@@ -49,10 +49,12 @@ def add_olympiads_to_bd():
     time.sleep(1)
     for i in range(len(subjects)):
         try:
-            sub_id = Subjects.objects.get(subject=subjects[i]).id
+            subject = subjects[i]
+            print("Parse " + subject.name)
+            sub_id = Subjects.objects.get(subject=subject).id
             data_start = ''
 
-            URL = f'https://olimpiada.ru/activities?type=any&subject%5B{numbers[subjects[i].strip().capitalize()]}' \
+            URL = f'https://olimpiada.ru/activities?type=any&subject%5B{numbers[subject.strip().capitalize()]}' \
                   f'%5D=on&class=any&period_date=&period=week'
             driver.get(URL)
 
@@ -111,7 +113,7 @@ def add_olympiads_to_bd():
                         stage = step
                         schedule = fg
                         site = href_olimp
-                        f = (title in subjects_rsosh[subjects[i].lower().capitalize()])
+                        f = (title in subjects_rsosh[subject.lower().capitalize()])
                         Olympiads.objects.create(title=title, start=start, stage=stage, schedule=schedule,
                                                  site=site, rsoch=f, sub_id=sub_id).save()
                         for tg in NotificationDates.objects.filter(sub_id=sub_id).all():
