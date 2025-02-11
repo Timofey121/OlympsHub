@@ -62,6 +62,5 @@ USER app
 # Разрешаем выполнение entrypoint скрипта
 RUN chmod +x entrypoint.prod.sh
 
-
 # Определяем точку входа
 ENTRYPOINT ["/home/app/web/entrypoint.prod.sh"]

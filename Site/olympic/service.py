@@ -1,19 +1,18 @@
 import time
 
 import requests
-import undetected_chromedriver
 from bs4 import BeautifulSoup
 from django.core.mail import send_mail
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.chrome.service import Service as ChromeService
-from webdriver_manager.chrome import ChromeDriverManager
 
 from .models import Subjects, Olympiads, NotificationDates
 from .templates.dictionary import numbers, months, months2, subjects_rsosh
 
 
 def send_email(name_email, user, body):
-    send_mail(name_email, '', 'from@example.com', [user],
-              html_message=body, fail_silently=False, )
+    send_mail(name_email, '', 'from@example.com', [user], html_message=body, fail_silently=False, )
 
 
 def translate_english_letters_into_russian(text: str):
@@ -33,7 +32,7 @@ def add_olympiads_to_bd():
 
     subjects = Subjects.objects.all()
 
-    chrome_options = undetected_chromedriver.ChromeOptions()
+    chrome_options = ChromeOptions()
     chrome_options.binary_location = "/usr/bin/google-chrome-stable"
     chrome_options.add_argument("--headless=new")  # Новый headless-режим (рекомендуется для Chrome 112+)
     chrome_options.add_argument('--no-sandbox')
@@ -42,9 +41,9 @@ def add_olympiads_to_bd():
     chrome_options.add_argument("--disable-extensions")  # Отключение расширений
     chrome_options.add_argument("--remote-debugging-port=9222")  # Порт для удаленной отладки
     chrome_options.add_argument("--window-size=1920,1080")  # Установка размера окна (важно для некоторых сайтов)
-    service = ChromeService(ChromeDriverManager().install())
 
-    driver = undetected_chromedriver.Chrome(service=service, options=chrome_options)
+    service = ChromeService(executable_path='/usr/local/bin/chromedriver')
+    driver = webdriver.Chrome(service=service, options=chrome_options)
 
     time.sleep(1)
     for i in range(len(subjects)):
