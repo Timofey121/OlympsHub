@@ -21,7 +21,6 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
     rm chromedriver_linux64.zip && \
     mv chromedriver /usr/local/bin/
 
-chmod -R 755 /home/app  # Чтение/запуск для всех, запись только для владельца
 
 # Обновляем pip и устанавливаем зависимости
 RUN pip install --upgrade pip
@@ -59,6 +58,8 @@ USER app
 
 # Разрешаем выполнение entrypoint скрипта
 RUN chmod +x entrypoint.prod.sh
+
+chmod -R 755 /home/app  # Чтение/запуск для всех, запись только для владельца
 
 # Определяем точку входа
 ENTRYPOINT ["/home/app/web/entrypoint.prod.sh"]
