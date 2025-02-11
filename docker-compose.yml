@@ -84,10 +84,10 @@ services:
     depends_on:
       - redis
       - django
+      - postgres
     env_file:
       - .env.db
-    command: >
-      sh -c "./entrypoint.sh && celery -A Site worker -l info"
+    command: 'celery -A Site worker -l info'
     networks:
       - my_network
 
@@ -100,10 +100,10 @@ services:
       - redis
       - django
       - worker
+      - postgres
     env_file:
       - .env.db
-    command: >
-      sh -c "./entrypoint.sh && celery -A Site beat -l info"
+    command: 'celery -A Site worker -l info'
     networks:
       - my_network
 
