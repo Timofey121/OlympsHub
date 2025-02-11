@@ -38,13 +38,13 @@ def add_olympiads_to_bd():
     subjects = Subjects.objects.all()
 
     options = webdriver.ChromeOptions()
-    options.add_argument("--headless=new")
+    options.add_argument("--headless=new")  # Новый headless-режим (рекомендуется для Chrome 112+)
     options.add_argument('--no-sandbox')
-    options.add_argument("--disable-extensions")
-    options.add_argument("--disable-gpu")
-    options.add_argument("--disable-dev-shm-usage")
-    options.add_argument("--no-sandbox")
-    options.add_argument('--start-maximized')
+    options.add_argument("--disable-dev-shm-usage")  # Решение для ограниченной памяти в контейнерах
+    options.add_argument("--disable-gpu")  # Отключение GPU, так как он не нужен в headless-режиме
+    options.add_argument("--disable-extensions")  # Отключение расширений
+    options.add_argument("--remote-debugging-port=9222")  # Порт для удаленной отладки
+    options.add_argument("--window-size=1920,1080")  # Установка размера окна (важно для некоторых сайтов)
     driver = webdriver.Chrome(options=options)
     time.sleep(1)
     for i in range(len(subjects)):
