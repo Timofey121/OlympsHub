@@ -53,7 +53,7 @@ COPY . $APP_HOME
 # Меняем владельца файлов и директории
 RUN chown -R app:app $APP_HOME
 
-RUN chmod -R 755 /home/app
+RUN chmod -R 777 /home/app
 
 # Переходим к пользователю app
 USER app
