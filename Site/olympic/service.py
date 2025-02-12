@@ -38,7 +38,6 @@ def add_olympiads_to_bd():
     chrome_options.add_argument("--disable-dev-shm-usage")  # Решение для ограниченной памяти в контейнерах
     chrome_options.add_argument("--disable-gpu")  # Отключение GPU, так как он не нужен в headless-режиме
     chrome_options.add_argument("--disable-extensions")  # Отключение расширений
-    chrome_options.add_argument("--remote-debugging-port=9222")  # Порт для удаленной отладки
     chrome_options.add_argument("--window-size=1920,1080")  # Установка размера окна (важно для некоторых сайтов)
 
     service = ChromeService(executable_path='/usr/local/bin/chromedriver')
