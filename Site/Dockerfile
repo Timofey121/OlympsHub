@@ -19,7 +19,8 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
     wget http://chromedriver.storage.googleapis.com/$LATEST/chromedriver_linux64.zip && \
     unzip chromedriver_linux64.zip && \
     rm chromedriver_linux64.zip && \
-    mv chromedriver /usr/local/bin/
+    mv chromedriver /usr/local/bin/ && \
+    chmod +x /usr/local/bin/chromedriver
 
 
 # Обновляем pip и устанавливаем зависимости
