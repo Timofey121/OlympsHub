@@ -5,7 +5,7 @@ WORKDIR /usr/src/app
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-# Install system dependencies
+# Install system dependencies AND Chrome in the final image
 RUN apt-get update && apt-get install -y \
     libnss3 \
     libnss3-tools \
@@ -14,8 +14,6 @@ RUN apt-get update && apt-get install -y \
     gnupg2 \
     unzip \
     netcat-traditional \
-    nginx \
-    gunicorn \
     xvfb \
     libgconf-2-4 \
     libxi6 \
@@ -29,10 +27,10 @@ RUN apt-get update && apt-get install -y \
     libgbm1
 
 # Install Google Chrome
-RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
-    echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list && \
-    apt-get update && \
-    apt-get install -y google-chrome-stable
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+    && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list \
+    && apt-get update \
+    && apt-get install -y google-chrome-stable
 
 # Upgrade pip and install Python dependencies
 RUN pip install --upgrade pip
@@ -74,6 +72,10 @@ ENV DISPLAY=:99
 
 # Switch to the app user
 USER app
+
+# Set permissions for ChromeDriver cache
+RUN mkdir -p /home/app/.wdm/drivers \
+    && chown -R app:app /home/app/.wdm \
 
 # Make entrypoint script executable
 RUN chmod +x entrypoint.prod.sh
