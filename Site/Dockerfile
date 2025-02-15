@@ -4,7 +4,6 @@ WORKDIR /usr/src/app
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
-ENV PATH="/usr/bin:${PATH}"
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -59,6 +58,7 @@ RUN chmod +x /home/app/web/chromedriver
 
 RUN chmod -R 777 /home/app
 ENV WDM_LOCAL=/usr/local/bin
+ENV PATH="/usr/bin:${PATH}"
 
 # Switch to the app user
 USER app
