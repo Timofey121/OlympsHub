@@ -40,7 +40,7 @@ def add_olympiads_to_bd():
     chrome_options.add_argument("--disable-extensions")  # Отключение расширений
     chrome_options.add_argument("--window-size=1920,1080")  # Установка размера окна (важно для некоторых сайтов)
 
-    service = ChromeService(executable_path='chromedriver')
+    service = ChromeService(executable_path='/chromedriver/chromedriver')
     driver = webdriver.Chrome(service=service, options=chrome_options)
 
     time.sleep(1)
