@@ -33,10 +33,6 @@ def add_olympiads_to_bd():
     #            'Технология, Искусство, Черчение, Психология'.split(', ')
 
     subjects = Subjects.objects.all()
-    print(subjects)
-    for i in range(len(subjects)):
-        subject = subjects[i]
-        print("We need parse -> " + subject)
 
     vdisplay = Xvfb()
     vdisplay.start()
@@ -54,9 +50,9 @@ def add_olympiads_to_bd():
     time.sleep(1)
     for i in range(len(subjects)):
         try:
-            subject = subjects[i]
-            sub_id = Subjects.objects.get(subject=subject).id
-            print("Parse " + subject.name)
+            sub_id = Subjects.objects.get(subject=subjects[i]).id
+            subject = subjects[i].subject
+            print("Parse " + subject)
 
             URL = f'https://olimpiada.ru/activities?type=any&subject%5B{numbers[subject.strip().capitalize()]}' \
                   f'%5D=on&class=any&period_date=&period=week'
