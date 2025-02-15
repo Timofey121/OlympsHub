@@ -30,6 +30,7 @@ RUN pip install --upgrade pip
 COPY ./requirements.txt .
 RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r requirements.txt
 
+FROM python:3.11
 
 # Create directories and user
 RUN mkdir -p /home/app/web/staticfiles /home/app/web/mediafiles && \
