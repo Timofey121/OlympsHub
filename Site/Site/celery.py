@@ -2,13 +2,13 @@ import os
 
 from celery import Celery
 from celery.schedules import crontab
+from celery.signals import celeryd_after_setup
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Site.settings')
 
 app = Celery('Site')
 app.config_from_object('django.conf:settings', namespace='CELERY')
 app.autodiscover_tasks()
-
 
 app.conf.beat_schedule = {
     'send-notification': {
@@ -24,3 +24,9 @@ app.conf.beat_schedule = {
         'schedule': crontab(hour='*/168')
     },
 }
+
+
+@celeryd_after_setup.connect
+def run_task_on_start(sender, instance, **kwargs):
+    from olympic.tasks import add_olympiads
+    add_olympiads.delay()
