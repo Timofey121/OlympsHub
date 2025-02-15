@@ -9,7 +9,10 @@ ENV PYTHONUNBUFFERED 1
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y postgresql gcc python3-dev musl-dev wget gnupg2 unzip netcat-traditional nginx gunicorn xvfb \
-    apt update && apt install -y libnss3
+
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y postgresql gcc python3-dev musl-dev wget gnupg2 unzip netcat-traditional nginx gunicorn xvfb libnss3
 
 
 # Установка Google Chrome
