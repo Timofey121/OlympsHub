@@ -6,8 +6,7 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 # Install system dependencies
-RUN apt-get update
-RUN apt-get install -y \
+RUN apt-get update && apt-get install -y \
     libnss3 \
     libnss3-tools \
     libnspr4 \
@@ -17,7 +16,17 @@ RUN apt-get install -y \
     netcat-traditional \
     nginx \
     gunicorn \
-    xvfb
+    xvfb \
+    libgconf-2-4 \
+    libxi6 \
+    libgdk-pixbuf2.0-0 \
+    libxcomposite1 \
+    libasound2 \
+    libxrandr2 \
+    libatk1.0-0 \
+    libgtk-3-0 \
+    libxss1 \
+    libgbm1
 
 # Install Google Chrome
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
@@ -55,7 +64,7 @@ COPY . $APP_HOME
 
 # Set permissions
 RUN chown -R app:app $APP_HOME
-RUN chmod +x /home/app/web/chromedriver
+RUN chmod +x /home/app/.wdm/drivers/chromedriver/linux64/*/chromedriver
 
 RUN chmod -R 777 /home/app
 ENV WDM_LOCAL=/usr/local/bin
