@@ -6,6 +6,7 @@ from django.core.mail import send_mail
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
 from xvfbwrapper import Xvfb
 
 from .models import Subjects, Olympiads, NotificationDates
@@ -43,7 +44,7 @@ def add_olympiads_to_bd():
     chrome_options.add_argument("--disable-extensions")  # Отключение расширений
     chrome_options.add_argument("--window-size=1920,1080")  # Установка размера окна (важно для некоторых сайтов)
 
-    service = ChromeService(executable_path='/home/app/web/chromedriver/chromedriver')
+    service = ChromeService(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=chrome_options)
 
     time.sleep(1)
