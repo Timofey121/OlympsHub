@@ -46,7 +46,7 @@ COPY . $APP_HOME
 
 # Меняем владельца файлов и директории
 RUN chown -R app:app $APP_HOME
-RUN chmod +x /app/Site/chromedriver
+RUN chmod +x /Site/chromedriver
 
 RUN chmod -R 777 /home/app
 ENV WDM_LOCAL=/usr/local/bin
