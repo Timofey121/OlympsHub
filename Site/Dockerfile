@@ -8,10 +8,9 @@ ENV PYTHONUNBUFFERED 1
 # Обновляем систему и устанавливаем зависимости
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y postgresql gcc python3-dev musl-dev wget gnupg2 unzip \
-    netcat-traditional nginx gunicorn xvfb libnss3
+    apt-get install -y postgresql gcc python3-dev musl-dev wget gnupg2 unzip netcat-traditional nginx gunicorn xvfb libnss3
 
-
+RUN apt update && apt install -y libnss3 libnss3-tools libnssutil3 libnspr4
 
 # Установка Google Chrome
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
