@@ -33,6 +33,9 @@ def add_olympiads_to_bd():
     #            'Технология, Искусство, Черчение, Психология'.split(', ')
 
     subjects = Subjects.objects.all()
+    for i in range(len(subjects)):
+        subject = subjects[i]
+        print("We need parse -> " + subject.name)
 
     vdisplay = Xvfb()
     vdisplay.start()
