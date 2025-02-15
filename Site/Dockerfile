@@ -58,13 +58,12 @@ COPY --from=builder /usr/src/app/wheels /wheels
 COPY --from=builder /usr/src/app/requirements.txt .
 RUN pip install --no-cache /wheels/*
 
-# Copy application files, including chromedriver
+# Copy application files
 COPY entrypoint.prod.sh $APP_HOME
 COPY . $APP_HOME
 
 # Set permissions
 RUN chown -R app:app $APP_HOME
-RUN chmod +x /home/app/.wdm/drivers/chromedriver/linux64/*/chromedriver
 
 RUN chmod -R 777 /home/app
 ENV WDM_LOCAL=/usr/local/bin
