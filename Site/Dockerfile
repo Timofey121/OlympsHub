@@ -44,11 +44,9 @@ RUN pip install --no-cache /wheels/*
 COPY entrypoint.prod.sh $APP_HOME
 COPY . $APP_HOME
 
-# Копируем chromedriver в /usr/local/bin
-RUN #chmod +x /chromedriver
-
 # Меняем владельца файлов и директории
 RUN chown -R app:app $APP_HOME
+RUN chmod +x /usr/src/app/Site/chromedriver
 
 RUN chmod -R 777 /home/app
 ENV WDM_LOCAL=/usr/local/bin
