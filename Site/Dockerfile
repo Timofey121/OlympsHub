@@ -7,8 +7,7 @@ ENV PYTHONUNBUFFERED 1
 
 # Install system dependencies
 RUN apt-get update
-RUN apt-get install -y \
-    xvfb \
+RUN apt-get install -y
     libnss3 \
     libnss3-tools \
     libnspr4 \
@@ -17,8 +16,10 @@ RUN apt-get install -y \
     unzip \
     netcat-traditional \
     nginx \
-    gunicorn \
- && rm -rf /var/lib/apt/lists/*
+    gunicorn
+
+RUN apt-get update && apt-get install -y xvfb && \
+    echo "export DISPLAY=:99" >> /etc/environment
 
 # Install Google Chrome
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
