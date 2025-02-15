@@ -11,6 +11,7 @@ RUN apt-get update && \
     apt-get install -y postgresql gcc python3-dev musl-dev wget gnupg2 unzip netcat-traditional nginx gunicorn xvfb libnss3
 
 RUN apt-get update && apt-get install -y libnss3 libnss3-tools libnspr4
+RUN apt-get update && apt-get install -y xvfb
 
 # Установка Google Chrome
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
