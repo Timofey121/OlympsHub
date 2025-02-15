@@ -75,7 +75,7 @@ USER app
 
 # Set permissions for ChromeDriver cache
 RUN mkdir -p /home/app/.wdm/drivers \
-    && chown -R app:app /home/app/.wdm \
+    && chown -R app:app /home/app/.wdm
 
 # Make entrypoint script executable
 RUN chmod +x entrypoint.prod.sh
