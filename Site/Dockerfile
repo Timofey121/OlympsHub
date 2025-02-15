@@ -17,7 +17,8 @@ RUN apt-get install -y \
     unzip \
     netcat-traditional \
     nginx \
-    gunicorn
+    gunicorn \
+ && rm -rf /var/lib/apt/lists/*
 
 # Install Google Chrome
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
