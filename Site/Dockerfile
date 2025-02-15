@@ -64,7 +64,6 @@ COPY . $APP_HOME
 
 # Set permissions
 RUN chown -R app:app $APP_HOME
-RUN chmod +x /home/app/.wdm/drivers/chromedriver/linux64/*/chromedriver
 
 RUN chmod -R 777 /home/app
 ENV WDM_LOCAL=/usr/local/bin
