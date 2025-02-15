@@ -21,7 +21,8 @@ from olympic.views import error_404
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('olympic.urls'))
+    path('', include('olympic.urls')),
+    path('__debug__/', include('debug_toolbar.urls')),
 ]
 
 handler404 = error_404
