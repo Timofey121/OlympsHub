@@ -10,18 +10,11 @@ RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y postgresql gcc python3-dev musl-dev wget gnupg2 unzip netcat-traditional nginx gunicorn xvfb
 
-# Установка Google Chrome и Chromedriver
+# Установка Google Chrome
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
     echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list && \
     apt-get update && \
-    apt-get install -y google-chrome-stable && \
-    LATEST=$(wget -q -O - http://chromedriver.storage.googleapis.com/LATEST_RELEASE) && \
-    wget http://chromedriver.storage.googleapis.com/$LATEST/chromedriver_linux64.zip && \
-    unzip chromedriver_linux64.zip && \
-    rm chromedriver_linux64.zip && \
-    mv chromedriver /usr/local/bin/ && \
-    chmod +x /usr/local/bin/chromedriver
-
+    apt-get install -y google-chrome-stable
 
 # Обновляем pip и устанавливаем зависимости
 RUN pip install --upgrade pip
@@ -47,9 +40,13 @@ COPY --from=builder /usr/src/app/wheels /wheels
 COPY --from=builder /usr/src/app/requirements.txt .
 RUN pip install --no-cache /wheels/*
 
-# Копируем файлы приложения
+# Копируем файлы приложения, включая chromedriver
 COPY entrypoint.prod.sh $APP_HOME
 COPY . $APP_HOME
+
+# Копируем chromedriver в /usr/local/bin
+COPY bin/chromedriver /usr/local/bin/chromedriver
+RUN chmod +x /usr/local/bin/chromedriver
 
 # Меняем владельца файлов и директории
 RUN chown -R app:app $APP_HOME
