@@ -6,6 +6,7 @@ from django.core.mail import send_mail
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.chrome.service import Service as ChromeService
+from xvfbwrapper import Xvfb
 
 from .models import Subjects, Olympiads, NotificationDates
 from .templates.dictionary import numbers, months, months2, subjects_rsosh
@@ -32,6 +33,8 @@ def add_olympiads_to_bd():
 
     subjects = Subjects.objects.all()
 
+    vdisplay = Xvfb()
+    vdisplay.start()
     chrome_options = ChromeOptions()
     chrome_options.add_argument("--headless=new")  # Новый headless-режим (рекомендуется для Chrome 112+)
     chrome_options.add_argument('--no-sandbox')
@@ -127,3 +130,4 @@ def add_olympiads_to_bd():
             pass
 
     driver.close()
+    vdisplay.stop()
