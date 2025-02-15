@@ -7,7 +7,7 @@ ENV PYTHONUNBUFFERED 1
 
 # Install system dependencies
 RUN apt-get update
-RUN apt-get install -y
+RUN apt-get install -y \
     libnss3 \
     libnss3-tools \
     libnspr4 \
