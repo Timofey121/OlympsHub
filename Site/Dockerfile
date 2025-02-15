@@ -45,8 +45,7 @@ COPY entrypoint.prod.sh $APP_HOME
 COPY . $APP_HOME
 
 # Копируем chromedriver в /usr/local/bin
-COPY bin/chromedriver /usr/local/bin/chromedriver
-RUN chmod +x /usr/local/bin/chromedriver
+RUN #chmod +x /chromedriver
 
 # Меняем владельца файлов и директории
 RUN chown -R app:app $APP_HOME
