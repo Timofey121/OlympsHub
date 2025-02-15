@@ -6,6 +6,7 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 # Install system dependencies
+RUN apt-get update
 RUN apt-get install -y \
     xvfb \
     libnss3 \
