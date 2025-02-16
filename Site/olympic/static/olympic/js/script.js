@@ -17,6 +17,34 @@ $(function () {
     });
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    const navLinks = document.querySelector('.navigation_links'); // Основное меню
+    const navLinksMobile = document.querySelector('.navigation_links_mobile'); // Мобильное меню
+    const registerButton = document.querySelector('.account_button'); // Кнопка "Регистрация"
+
+    function moveElementsToMobileMenu() {
+        if (window.innerWidth < 700) {
+            // Перемещаем кнопку "Регистрация" в мобильное меню
+            if (registerButton && !navLinksMobile.contains(registerButton)) {
+                navLinksMobile.appendChild(registerButton);
+                registerButton.classList.add('mobile_register_button'); // Добавляем стиль
+            }
+        } else {
+            // Возвращаем кнопку обратно в основное меню
+            if (registerButton && !navLinks.contains(registerButton)) {
+                navLinks.appendChild(registerButton);
+                registerButton.classList.remove('mobile_register_button'); // Убираем стиль
+            }
+        }
+    }
+
+    // Вызываем при загрузке страницы
+    moveElementsToMobileMenu();
+
+    // Отслеживаем изменение размера экрана
+    window.addEventListener('resize', moveElementsToMobileMenu);
+});
+
 $('body').on('click', '.icon_hide', function () {
     if ($('#password_input').attr('type') == 'password') {
         $(this).addClass('view');

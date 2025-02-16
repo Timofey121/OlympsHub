@@ -1,11 +1,15 @@
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z3MDNEFGX5"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    window.dataLayer = window.dataLayer || [];
 
-  gtag('config', 'G-Z3MDNEFGX5');
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-Z3MDNEFGX5');
 </script>
 
 
@@ -131,20 +135,15 @@
             <li class="nav_link_mobile"><a href="{% url m.url_name %}">{{ m.title }}</a></li>
             {% endfor %}
             {% endif %}
-        </ul>
-        {% if request.user.is_authenticated %}
-        <div class="account_menu">
-            <ul class="open_menu_actions">
-                <li class="open_menu_actions_link" style="cursor: pointer;">
-                    <a href="{% url 'secret_token' %}" style="display: block;text-decoration: none;">Подключение
-                        Telegram через токен</a></li>
-                <div class="open_menu_line"></div>
-                <li class="open_menu_actions_link" style="cursor: pointer;">
-                    <a href="{% url 'logout' %}" style="display: block;text-decoration: none;">Выйти</a>
-                </li>
-            </ul>
-        </div>
-        {% endif %}
 
+            {% if request.user.is_authenticated %}
+            <li class="nav_link_mobile">
+                <a href="{% url 'secret_token' %}">Подключение
+                    Telegram через токен</a></li>
+            <li class="nav_link_mobile">
+                <a href="{% url 'logout' %}">Выйти</a>
+            </li>
+            {% endif %}
+        </ul>
     </div>
 </div>

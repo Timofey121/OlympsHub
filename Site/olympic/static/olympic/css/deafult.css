@@ -622,7 +622,7 @@ body {
         width: 100%;
         text-align: center;
         margin: 0;
-        height: 30px;
+        height: 35px;
         margin-top: 10px;
     }
 
@@ -764,6 +764,14 @@ body {
 
 /* Landscape phones and portrait tablets */
 @media screen and (max-width: 768px) {
+    .mobile_register_button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin: 15px auto;
+        text-align: center;
+    }
 
 
     .footer_link {
@@ -789,6 +797,14 @@ body {
 
 @media screen and (max-width: 480px) {
 
+    .mobile_register_button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin: 15px auto;
+        text-align: center;
+    }
 
     .footer_qr .footer_column {
         padding-left: 10px;
@@ -809,3 +825,4 @@ body {
     }
 
 }
+
