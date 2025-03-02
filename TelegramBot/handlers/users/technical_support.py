@@ -11,9 +11,13 @@ from loader import dp
 from states import Test
 from utils.db_api.PostgreSQL import add_user_tech, subscriber_exists
 
+from TelegramBot.handlers.users.start import addToBd
+
 
 @dp.message_handler(text="📝 Написать в тех поддержку", state=None)
 async def technical_support(message: types.Message):
+    if len(list(await subscriber_exists(telegram_id=str(message.from_user.id)))) == 0:
+        await addToBd(message)
     if int(list(await subscriber_exists(message.from_user.id))[0][-1]) != 1:
         if message.from_user.username is None:
             await message.answer(f"Привет, к сожалению, мы не сможем ответить Вам, т.к. у Вас нет имени пользователя!"

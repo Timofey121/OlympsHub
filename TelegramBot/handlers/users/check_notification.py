@@ -5,9 +5,13 @@ from aiogram.utils.markdown import hlink, hunderline, hbold
 from loader import dp
 from utils.db_api.PostgreSQL import select_data_sub_info, subscriber_exists, select_user, select_sub
 
+from TelegramBot.handlers.users.start import addToBd
+
 
 @dp.message_handler(text="🔔 Просмотр подключенных уведомлений")
 async def check_notification(message: types.Message):
+    if len(list(await subscriber_exists(telegram_id=str(message.from_user.id)))) == 0:
+        await addToBd(message)
     if int(list(await subscriber_exists(message.from_user.id))[0][-1]) != 1:
         await message.answer("Подождите немного! Начался поиск Ваших уведомлений!")
         try:

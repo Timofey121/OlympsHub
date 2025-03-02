@@ -16,6 +16,8 @@ from utils.db_api.PostgreSQL import subscriber_exists, information_about_olympia
 
 @dp.message_handler(text='✍️ Вывести информацию о нужной олимпиаде')
 async def info(message: types.Message):
+    if len(list(await subscriber_exists(telegram_id=str(message.from_user.id)))) == 0:
+        await addToBd(message)
     if int(list(await subscriber_exists(message.from_user.id))[0][-1]) != 1:
         await message.answer(f"Привет, Olympic на связи, сейчас я тебе со всем помогу.",
                              reply_markup=ReplyKeyboardRemove())

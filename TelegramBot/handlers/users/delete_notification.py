@@ -12,9 +12,13 @@ from states import Test
 from utils.db_api.PostgreSQL import select_data_olimp_use_id, subscriber_exists, select_data_sub_info, \
     del_notif_in_olimpic, select_user, select_sub, del_data_in_olimpic, select_sub_id, select_data_olimp_use_subject
 
+from TelegramBot.handlers.users.start import addToBd
+
 
 @dp.message_handler(text="🔔 Удаление уведомлений")
 async def del_notification(message: types.Message):
+    if len(list(await subscriber_exists(telegram_id=str(message.from_user.id)))) == 0:
+        await addToBd(message)
     if int(list(await subscriber_exists(message.from_user.id))[0][-1]) != 1:
         await message.answer(f"Привет, Olympic на связи, сейчас я тебе со всем помогу.",
                              reply_markup=ReplyKeyboardRemove())

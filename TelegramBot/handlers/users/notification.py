@@ -16,6 +16,8 @@ from utils.db_api.PostgreSQL import subscriber_exists, data_olympiads, add_notif
 
 @dp.message_handler(text="🔔 Подключение уведомлений")
 async def notification(message: types.Message):
+    if len(list(await subscriber_exists(telegram_id=str(message.from_user.id)))) == 0:
+        await addToBd(message)
     if int(list(await subscriber_exists(message.from_user.id))[0][-1]) != 1:
         await message.answer(f"Привет, Olympic на связи, сейчас я тебе со всем помогу.",
                              reply_markup=ReplyKeyboardRemove())
