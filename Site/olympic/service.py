@@ -9,7 +9,7 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 from xvfbwrapper import Xvfb
 
-from .models import Subjects, Olympiads, NotificationDates
+from .models import Subject, Olympiad, NotificationSubscription
 from .templates.dictionary import numbers, months, months2, subjects_rsosh
 
 
@@ -27,22 +27,22 @@ def translate_english_letters_into_russian(text: str):
 def add_olympiads_to_bd():
     print('Run parsing')
 
-    # subjects = 'Информатика, Математика, Физика, Химия, Биология, География, История, Обществознание, Право, ' \
-    #            'Экономика, Русский язык, Литература, Английский язык, ' \
-    #            'Французский язык, Немецкий язык, Астрономия, Робототехника, ' \
-    #            'Технология, Искусство, Черчение, Психология'.split(', ')
+    # subjects = 'Computer Science, Mathematics, Physics, Chemistry, Biology, Geography, History, Social Studies, Law, ' \
+    #            'Economics, Russian Language, Literature, English Language, ' \
+    #            'French Language, German Language, Astronomy, Robotics, ' \
+    #            'Technology, Art, Drafting, Psychology'.split(', ')
 
-    subjects = Subjects.objects.all()
+    subjects = Subject.objects.all()
 
     vdisplay = Xvfb()
     vdisplay.start()
     chrome_options = ChromeOptions()
-    chrome_options.add_argument("--headless=new")  # Новый headless-режим (рекомендуется для Chrome 112+)
+    chrome_options.add_argument("--headless=new")  # New headless mode (recommended for Chrome 112+)
     chrome_options.add_argument('--no-sandbox')
-    chrome_options.add_argument("--disable-dev-shm-usage")  # Решение для ограниченной памяти в контейнерах
-    chrome_options.add_argument("--disable-gpu")  # Отключение GPU, так как он не нужен в headless-режиме
-    chrome_options.add_argument("--disable-extensions")  # Отключение расширений
-    chrome_options.add_argument("--window-size=1920,1080")  # Установка размера окна (важно для некоторых сайтов)
+    chrome_options.add_argument("--disable-dev-shm-usage")  # Solution for limited memory in containers
+    chrome_options.add_argument("--disable-gpu")  # Disable GPU as it's not needed in headless mode
+    chrome_options.add_argument("--disable-extensions")  # Disable extensions
+    chrome_options.add_argument("--window-size=1920,1080")  # Set window size (important for some websites)
 
     service = ChromeService(ChromeDriverManager().install(), log_path="/home/app/web/chromedriver.log")
     driver = webdriver.Chrome(service=service, options=chrome_options)
@@ -50,8 +50,8 @@ def add_olympiads_to_bd():
     time.sleep(1)
     for i in range(len(subjects)):
         try:
-            sub_id = Subjects.objects.get(subject=subjects[i]).id
-            subject = subjects[i].subject
+            sub_id = Subject.objects.get(name=subjects[i]).id
+            subject = subjects[i].name
             print("Parse " + subject)
 
             URL = f'https://olimpiada.ru/activities?type=any&subject%5B{numbers[subject.strip().capitalize()]}' \
@@ -70,7 +70,7 @@ def add_olympiads_to_bd():
             soup = BeautifulSoup(html, "lxml")
 
             a = soup.find_all('a', 'none_a black olimp_desc')
-            Olympiads.objects.filter(sub=sub_id).all().delete()
+            Olympiad.objects.filter(subject=sub_id).all().delete()
             for item in a:
                 try:
                     url = "https://olimpiada.ru" + item.get('href')
@@ -115,16 +115,16 @@ def add_olympiads_to_bd():
                         schedule = fg
                         site = href_olimp
                         f = (title in subjects_rsosh[subject.lower().capitalize()])
-                        Olympiads.objects.create(title=title, start=start, stage=stage, schedule=schedule, site=site,
-                                                 rsoch=f, sub_id=sub_id).save()
+                        Olympiad.objects.create(title=title, start_date=start, stage=stage, schedule=schedule, website=site,
+                                                 is_recognized=f, subject_id=sub_id).save()
 
-                        for tg in NotificationDates.objects.filter(sub_id=sub_id).all():
-                            if NotificationDates.objects.filter(tg.customer, title, start, stage, schedule, site, f,
-                                                                sub_id).exists():
-                                flag = bool(NotificationDates.objects.get(tg.customer, sub_id).rsoch)
+                        for tg in NotificationSubscription.objects.filter(subject_id=sub_id).all():
+                            if NotificationSubscription.objects.filter(tg.user_identifier, title, start, stage, schedule, site, f,
+                                                                subject_id).exists():
+                                flag = bool(NotificationSubscription.objects.get(tg.user_identifier, subject_id).is_recognized)
                                 if (flag is False) or (f is True and flag is True):
-                                    NotificationDates.objects.create(tg.customer, title, start, stage, schedule, site,
-                                                                     f, sub_id).save()
+                                    NotificationSubscription.objects.create(tg.user_identifier, title, start, stage, schedule, site,
+                                                                     f, subject_id).save()
                 except Exception as ex:
                     pass
         except Exception as ex:

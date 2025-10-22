@@ -2,195 +2,195 @@ from django.db import models
 from django.urls import reverse
 
 
-class RegistrationTelegram(models.Model):
-    # id - PrimaryKey внесен в БД по умолчанию
-    telegram_id = models.CharField(max_length=2000, verbose_name="Telegram id")
-    full_name = models.CharField(max_length=2000, verbose_name="Имя пользователя")
-    data_registration = models.CharField(max_length=2000, verbose_name="Дата регистрации")
-    blocked = models.BooleanField(max_length=2000, verbose_name="Заблокирован ли?")
+class TelegramRegistration(models.Model):
+    # id - PrimaryKey is added to DB by default
+    telegram_id = models.CharField(max_length=2000, verbose_name="Telegram ID")
+    full_name = models.CharField(max_length=2000, verbose_name="User Full Name")
+    registration_date = models.CharField(max_length=2000, verbose_name="Registration Date")
+    blocked = models.BooleanField(max_length=2000, verbose_name="Is Blocked?")
 
-    # Тогда при выводе всех записей, для различия записей, будет отображаться их title
+    # When displaying all records, for distinction, their title will be displayed
     def __str__(self):
         return self.full_name
 
-    # Класс для работы с моделью в Админ-панели
+    # Class for working with the model in Admin panel
     class Meta:
-        verbose_name = 'Регистрация Телеграмм'  # название нашей модели в единственном числе
-        verbose_name_plural = 'Регистрация Телеграм'  # название нашей модели во множественном числе
-        ordering = ['full_name', '-data_registration']  # сортировка
+        verbose_name = 'Telegram Registration'  # our model name in singular
+        verbose_name_plural = 'Telegram Registrations'  # our model name in plural
+        ordering = ['full_name', '-registration_date']  # sorting
 
 
-class RegistrationSite(models.Model):
-    # id - PrimaryKey внесен в БД по умолчанию
-    customer = models.CharField(max_length=2000, verbose_name="Имя пользователя")
-    data_registration = models.CharField(max_length=2000, verbose_name="Дата регистрации")
+class SiteRegistration(models.Model):
+    # id - PrimaryKey is added to DB by default
+    username = models.CharField(max_length=2000, verbose_name="Username")
+    registration_date = models.CharField(max_length=2000, verbose_name="Registration Date")
     email = models.CharField(max_length=2000, verbose_name="E-mail", default=None)
-    blocked = models.BooleanField(max_length=2000, verbose_name="Заблокирован ли?")
+    blocked = models.BooleanField(max_length=2000, verbose_name="Is Blocked?")
 
-    # Тогда при выводе всех записей, для различия записей, будет отображаться их title
+    # When displaying all records, for distinction, their title will be displayed
     def __str__(self):
-        return self.customer
+        return self.username
 
-    # Класс для работы с моделью в Админ-панели
+    # Class for working with the model in Admin panel
     class Meta:
-        verbose_name = 'Регистрация Сайт'  # название нашей модели в единственном числе
-        verbose_name_plural = 'Регистрация Сайт'  # название нашей модели во множественном числе
-        ordering = ['customer', '-data_registration']  # сортировка
+        verbose_name = 'Site Registration'  # our model name in singular
+        verbose_name_plural = 'Site Registrations'  # our model name in plural
+        ordering = ['username', '-registration_date']  # sorting
 
 
-class ResetPassword(models.Model):
-    # id - PrimaryKey внесен в БД по умолчанию
-    customer = models.CharField(max_length=2000, verbose_name="Имя пользователя")
-    token = models.CharField(max_length=2000, verbose_name="Токен")
-    data_created = models.DateField(verbose_name="Время создания ссылки для сброса пароля")
+class PasswordReset(models.Model):
+    # id - PrimaryKey is added to DB by default
+    username = models.CharField(max_length=2000, verbose_name="Username")
+    token = models.CharField(max_length=2000, verbose_name="Token")
+    created_date = models.DateField(verbose_name="Password Reset Link Creation Time")
 
-    # Тогда при выводе всех записей, для различия записей, будет отображаться их title
+    # When displaying all records, for distinction, their title will be displayed
     def __str__(self):
-        return self.customer
+        return self.username
 
-    # Класс для работы с моделью в Админ-панели
+    # Class for working with the model in Admin panel
     class Meta:
-        verbose_name = 'Сброс Пароля'  # название нашей модели в единственном числе
-        verbose_name_plural = 'Сброс пароля'  # название нашей модели во множественном числе
-        ordering = ['customer']  # сортировка
+        verbose_name = 'Password Reset'  # our model name in singular
+        verbose_name_plural = 'Password Resets'  # our model name in plural
+        ordering = ['username']  # sorting
 
 
-class Olympiads(models.Model):
-    title = models.CharField(max_length=2000, verbose_name="Название олимпиады")
-    start = models.CharField(max_length=2000, verbose_name="Дата начала олимпиады")
-    stage = models.CharField(max_length=2000, verbose_name="Этап олимпиады", default='None')
-    schedule = models.CharField(max_length=2000, verbose_name="Расписание олимпиады", default='None')
-    site = models.CharField(max_length=2000, verbose_name="Сайт олимпиады", default='None')
-    rsoch = models.BooleanField(max_length=2000, verbose_name="Входит ли в перечень?")
+class Olympiad(models.Model):
+    title = models.CharField(max_length=2000, verbose_name="Olympiad Title")
+    start_date = models.CharField(max_length=2000, verbose_name="Olympiad Start Date")
+    stage = models.CharField(max_length=2000, verbose_name="Olympiad Stage", default='None')
+    schedule = models.CharField(max_length=2000, verbose_name="Olympiad Schedule", default='None')
+    website = models.CharField(max_length=2000, verbose_name="Olympiad Website", default='None')
+    is_recognized = models.BooleanField(max_length=2000, verbose_name="Is in Official List?")
 
-    sub = models.ForeignKey('Subjects', on_delete=models.PROTECT, verbose_name="Предмет")
+    subject = models.ForeignKey('Subject', on_delete=models.PROTECT, verbose_name="Subject")
 
-    # Тогда при выводе всех записей, для различия записей, будет отображаться их title
-    def __str__(self):
-        return self.title
-
-    # Класс для работы с моделью в Админ-панели
-    class Meta:
-        verbose_name = 'Олимпиада'  # название нашей модели в единственном числе
-        verbose_name_plural = 'Олимпиады'  # название нашей модели во множественном числе
-        ordering = ['sub', 'start']  # сортировка
-
-
-class NotificationDates(models.Model):
-    customer = models.CharField(max_length=2000, verbose_name="Пользователь или его Telegram_ID")
-
-    title = models.CharField(max_length=2000, verbose_name="Название олимпиады")
-    start = models.CharField(max_length=2000, verbose_name="Дата начала олимпиады")
-    stage = models.CharField(max_length=2000, verbose_name="Этап олимпиады", default='None')
-    schedule = models.CharField(max_length=2000, verbose_name="Расписание олимпиады", default='None')
-    site = models.CharField(max_length=2000, verbose_name="Сайт олимпиады", default='None')
-
-    rsoch = models.BooleanField(max_length=2000, verbose_name="Входит ли в перечень?")
-
-    sub = models.ForeignKey('Subjects', on_delete=models.PROTECT, verbose_name="Предмет")
-
-    # Тогда при выводе всех записей, для различия записей, будет отображаться их title
+    # When displaying all records, for distinction, their title will be displayed
     def __str__(self):
         return self.title
 
-    # Класс для работы с моделью в Админ-панели
+    # Class for working with the model in Admin panel
     class Meta:
-        verbose_name = 'Подключенное уведомление'  # название нашей модели в единственном числе
-        verbose_name_plural = 'Подключенные уведомления'  # название нашей модели во множественном числе
-        ordering = ['customer', 'start']  # сортировка
+        verbose_name = 'Olympiad'  # our model name in singular
+        verbose_name_plural = 'Olympiads'  # our model name in plural
+        ordering = ['subject', 'start_date']  # sorting
 
 
-class Subjects(models.Model):
-    subject = models.CharField(max_length=2000, verbose_name="Предмет")
+class NotificationSubscription(models.Model):
+    user_identifier = models.CharField(max_length=2000, verbose_name="User or Telegram ID")
+
+    title = models.CharField(max_length=2000, verbose_name="Olympiad Title")
+    start_date = models.CharField(max_length=2000, verbose_name="Olympiad Start Date")
+    stage = models.CharField(max_length=2000, verbose_name="Olympiad Stage", default='None')
+    schedule = models.CharField(max_length=2000, verbose_name="Olympiad Schedule", default='None')
+    website = models.CharField(max_length=2000, verbose_name="Olympiad Website", default='None')
+
+    is_recognized = models.BooleanField(max_length=2000, verbose_name="Is in Official List?")
+
+    subject = models.ForeignKey('Subject', on_delete=models.PROTECT, verbose_name="Subject")
+
+    # When displaying all records, for distinction, their title will be displayed
+    def __str__(self):
+        return self.title
+
+    # Class for working with the model in Admin panel
+    class Meta:
+        verbose_name = 'Notification Subscription'  # our model name in singular
+        verbose_name_plural = 'Notification Subscriptions'  # our model name in plural
+        ordering = ['user_identifier', 'start_date']  # sorting
+
+
+class Subject(models.Model):
+    name = models.CharField(max_length=2000, verbose_name="Subject Name")
     slug = models.SlugField(max_length=2000, unique=True, db_index=True, verbose_name="URL")
-    photo = models.ImageField(upload_to="subjects/", verbose_name="Фото")
+    photo = models.ImageField(upload_to="subjects/", verbose_name="Photo")
 
     def __str__(self):
-        return self.subject
+        return self.name
 
     def get_absolute_url(self):
-        return reverse('subject', kwargs={'sub_slug': self.slug})
+        return reverse('subject', kwargs={'subject_slug': self.slug})
 
     class Meta:
-        verbose_name = 'Предмет'  # название нашей модели в единственном числе
-        verbose_name_plural = 'Предметы'  # название нашей модели во множественном числе
-        ordering = ['subject']  # сортировка
+        verbose_name = 'Subject'  # our model name in singular
+        verbose_name_plural = 'Subjects'  # our model name in plural
+        ordering = ['name']  # sorting
 
 
 class SecretToken(models.Model):
-    # id - PrimaryKey внесен в БД по умолчанию
-    telegram_id = models.CharField(max_length=2000, verbose_name="Telegram id")
-    secret_token = models.CharField(max_length=2000, verbose_name="Секретный Токен")
+    # id - PrimaryKey is added to DB by default
+    telegram_id = models.CharField(max_length=2000, verbose_name="Telegram ID")
+    secret_token = models.CharField(max_length=2000, verbose_name="Secret Token")
 
-    # Тогда при выводе всех записей, для различия записей, будет отображаться их title
+    # When displaying all records, for distinction, their title will be displayed
     def __str__(self):
         return self.telegram_id
 
-    # Класс для работы с моделью в Админ-панели
+    # Class for working with the model in Admin panel
     class Meta:
-        verbose_name = 'Секретный Токен'  # название нашей модели в единственном числе
-        verbose_name_plural = 'Секретные Токены'  # название нашей модели во множественном числе
-        ordering = ['telegram_id', ]  # сортировка
+        verbose_name = 'Secret Token'  # our model name in singular
+        verbose_name_plural = 'Secret Tokens'  # our model name in plural
+        ordering = ['telegram_id', ]  # sorting
 
 
-class UserNameAndTelegramID(models.Model):
-    telegram_id = models.CharField(max_length=2000, verbose_name="Telegram id")
-    customer = models.CharField(max_length=2000, verbose_name="Пользователь")
+class UserTelegramConnection(models.Model):
+    telegram_id = models.CharField(max_length=2000, verbose_name="Telegram ID")
+    username = models.CharField(max_length=2000, verbose_name="Username")
 
-    # Тогда при выводе всех записей, для различия записей, будет отображаться их title
+    # When displaying all records, for distinction, their title will be displayed
     def __str__(self):
         return self.telegram_id
 
-    # Класс для работы с моделью в Админ-панели
+    # Class for working with the model in Admin panel
     class Meta:
-        verbose_name = 'Соединение Телеграмм и Сайта'  # название нашей модели в единственном числе
-        verbose_name_plural = 'Соединение Телеграмм и Сайта'  # название нашей модели во множественном числе
-        ordering = ['telegram_id', ]  # сортировка
+        verbose_name = 'User Telegram Connection'  # our model name in singular
+        verbose_name_plural = 'User Telegram Connections'  # our model name in plural
+        ordering = ['telegram_id', ]  # sorting
 
 
 class Feedback(models.Model):
-    # id - PrimaryKey внесен в БД по умолчанию
-    customer = models.CharField(max_length=2000, verbose_name="Пользователь")
-    feedback = models.CharField(max_length=2000, verbose_name="Обратная связь")
+    # id - PrimaryKey is added to DB by default
+    username = models.CharField(max_length=2000, verbose_name="Username")
+    feedback_text = models.CharField(max_length=2000, verbose_name="Feedback")
 
-    # Тогда при выводе всех записей, для различия записей, будет отображаться их title
+    # When displaying all records, for distinction, their title will be displayed
     def __str__(self):
-        return self.customer
+        return self.username
 
-    # Класс для работы с моделью в Админ-панели
+    # Class for working with the model in Admin panel
     class Meta:
-        verbose_name = 'Отзыв'  # название нашей модели в единственном числе
-        verbose_name_plural = 'Отзывы'  # название нашей модели во множественном числе
-        ordering = ['customer']  # сортировка
+        verbose_name = 'Feedback'  # our model name in singular
+        verbose_name_plural = 'Feedbacks'  # our model name in plural
+        ordering = ['username']  # sorting
 
 
 class TechnicalSupport(models.Model):
-    # id - PrimaryKey внесен в БД по умолчанию
-    customer = models.CharField(max_length=2000, verbose_name="Telegram id")
-    help = models.CharField(max_length=2000, verbose_name="Обращение")
+    # id - PrimaryKey is added to DB by default
+    telegram_id = models.CharField(max_length=2000, verbose_name="Telegram ID")
+    support_request = models.CharField(max_length=2000, verbose_name="Support Request")
 
-    # Тогда при выводе всех записей, для различия записей, будет отображаться их title
+    # When displaying all records, for distinction, their title will be displayed
     def __str__(self):
-        return self.customer
+        return self.telegram_id
 
-    # Класс для работы с моделью в Админ-панели
+    # Class for working with the model in Admin panel
     class Meta:
-        verbose_name = 'Обращение в помощь'  # название нашей модели в единственном числе
-        verbose_name_plural = 'Обращения в помощь'  # название нашей модели во множественном числе
-        ordering = ['customer', 'help']  # сортировка
+        verbose_name = 'Technical Support Request'  # our model name in singular
+        verbose_name_plural = 'Technical Support Requests'  # our model name in plural
+        ordering = ['telegram_id', 'support_request']  # sorting
 
 
 class Payment(models.Model):
-    # id - PrimaryKey внесен в БД по умолчанию
-    customer = models.CharField(max_length=2000, verbose_name="Telegram id")
-    data = models.CharField(max_length=2000, verbose_name="Обращение")
+    # id - PrimaryKey is added to DB by default
+    telegram_id = models.CharField(max_length=2000, verbose_name="Telegram ID")
+    payment_data = models.CharField(max_length=2000, verbose_name="Payment Data")
 
-    # Тогда при выводе всех записей, для различия записей, будет отображаться их title
+    # When displaying all records, for distinction, their title will be displayed
     def __str__(self):
-        return self.customer
+        return self.telegram_id
 
-    # Класс для работы с моделью в Админ-панели
+    # Class for working with the model in Admin panel
     class Meta:
-        verbose_name = 'Оплата'  # название нашей модели в единственном числе
-        verbose_name_plural = 'Оплата'  # название нашей модели во множественном числе
-        ordering = ['customer', 'data']  # сортировка
+        verbose_name = 'Payment'  # our model name in singular
+        verbose_name_plural = 'Payments'  # our model name in plural
+        ordering = ['telegram_id', 'payment_data']  # sorting

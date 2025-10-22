@@ -24,7 +24,7 @@
 
     <div class="register_title_cont">
         <div class="register_title">
-            Авторизация
+            Login
         </div>
     </div>
 
@@ -36,7 +36,7 @@
         {% endfor %}
         <div class="input_cont">
             <div class="input_title">
-                Логин
+                Username
             </div>
             <svg class="icon_pass" width="24" height="24" viewBox="0 0 24 24" fill="none"
                  xmlns="http://www.w3.org/2000/svg">
@@ -50,9 +50,9 @@
         </div>
         <div class="input_cont">
             <div class="input_title input_title_for_pass_in_login">
-                Пароль
+                Password
                 <a href="{% url 'password_reset' %}">
-                    Забыли пароль?
+                    Forgot password?
                 </a>
             </div>
             <svg class="icon_pass" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -70,11 +70,11 @@
             <label for="password_input" class="label_for_input"></label>
         </div>
         <button class="submit_button" type="submit">
-            Войти
+            Login
         </button>
     </div>
     <div class="question">
-        У вас еще нет аккаунта?<br><a href="{% url 'registration' %}">Зарегистрироваться</a>
+        Don't have an account yet?<br><a href="{% url 'registration' %}">Register</a>
     </div>
 </form>
 {% include 'olympic/base/footer.html' %}

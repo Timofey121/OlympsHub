@@ -8,18 +8,18 @@ urlpatterns = [
     path('', main, name='home'),
     path('account/', account, name='account'),
 
-    path('info/', AllOlympiads, name='info'),
-    path('info/<slug:sub_slug>/', FilterOlympiads, name='subject'),
+    path('olympiads/', all_olympiads, name='olympiads'),
+    path('olympiads/<slug:subject_slug>/', filter_olympiads, name='subject'),
 
-    path('notification/', Notification, name='notification'),
+    path('notifications/', notification_management, name='notifications'),
     path('change_email/', change_email, name='change_email'),
 
-    path('SecretToken/', token, name='secret_token'),
+    path('telegram_token/', telegram_token, name='telegram_token'),
     path('login/', LoginUser.as_view(), name='login'),
     path('registration/', RegisterUser.as_view(), name='registration'),
     path('logout/', logout_user, name='logout'),
     path('password_reset/', password_reset, name='password_reset'),
-    path('password_reset/<slug:token>', password_reset_for_usr, name='password_reset_for_usr'),
+    path('password_reset/<slug:token>', password_reset_for_user, name='password_reset_for_user'),
 
 ]
 

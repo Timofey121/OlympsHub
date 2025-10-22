@@ -1,4 +1,8 @@
+# OlympiadHub Docker Compose Configuration
+# This file defines all services required to run the OlympiadHub platform
+
 services:
+  # PostgreSQL Database Service
   postgres:
     image: postgres:15
     restart: always
@@ -9,13 +13,20 @@ services:
     ports:
       - "5432:5432"
     networks:
-      - my_network
+      - olympiad_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U olympiad_user -d olympiadhub"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
+  # Django Web Application Service
   django:
     build: ./Site
     restart: always
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     volumes:
       - ./Site:/Site
       - static_volume:/home/app/web/staticfiles
@@ -26,30 +37,40 @@ services:
     ports:
       - "8000:8000"
     networks:
-      - my_network
+      - olympiad_network
     command: >
       sh -c "python manage.py migrate &&
              python manage.py collectstatic --noinput &&
              gunicorn --bind 0.0.0.0:8000 Site.wsgi"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
-  bot:
+  # Telegram Bot Service
+  telegram_bot:
     build: ./TelegramBot
     restart: always
     depends_on:
-      - postgres
-      - django
+      postgres:
+        condition: service_healthy
+      django:
+        condition: service_healthy
     env_file:
       - .env.db
       - TelegramBot/.env.tg
     networks:
-      - my_network
+      - olympiad_network
     command: [ "python", "main_olympiads.py" ]
 
+  # Nginx Reverse Proxy Service
   nginx:
     restart: always
     build: ./nginx
     depends_on:
-      - django
+      django:
+        condition: service_healthy
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt:ro
       - static_volume:/home/app/web/staticfiles
@@ -58,14 +79,21 @@ services:
       - "80:80"
       - "443:443"
     networks:
-      - my_network
+      - olympiad_network
 
+  # Redis Cache and Message Broker Service
   redis:
     image: "redis:alpine"
     restart: always
     networks:
-      - my_network
+      - olympiad_network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
+  # Flower - Celery Monitoring Service
   flower:
     image: mher/flower
     environment:
@@ -74,38 +102,52 @@ services:
     ports:
       - "5555:5555"
     networks:
-      - my_network
+      - olympiad_network
+    depends_on:
+      redis:
+        condition: service_healthy
 
-  worker:
+  # Celery Worker Service
+  celery_worker:
     restart: always
     build: ./Site
     volumes:
       - .:/usr/src/app
     depends_on:
-      - redis
-      - django
-      - postgres
+      redis:
+        condition: service_healthy
+      django:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
     env_file:
       - .env.db
+      - Site/.env.site
     command: 'celery -A Site worker -l info -E'
     networks:
-      - my_network
+      - olympiad_network
 
-  beat:
+  # Celery Beat Scheduler Service
+  celery_beat:
     restart: always
     build: ./Site
     volumes:
       - .:/usr/src/app
     depends_on:
-      - redis
-      - django
-      - worker
-      - postgres
+      redis:
+        condition: service_healthy
+      django:
+        condition: service_healthy
+      celery_worker:
+        condition: service_started
+      postgres:
+        condition: service_healthy
     env_file:
       - .env.db
+      - Site/.env.site
     command: 'celery -A Site beat -l info'
     networks:
-      - my_network
+      - olympiad_network
 
 
 volumes:
@@ -114,5 +156,5 @@ volumes:
   media_volume:
 
 networks:
-  my_network:
+  olympiad_network:
     driver: bridge
